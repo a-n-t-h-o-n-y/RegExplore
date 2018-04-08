@@ -2,4 +2,6 @@
 
 namespace regex_explore {
 
-}
+Top_bar::Top_bar() {}
+
+}  // namespace regex_explore

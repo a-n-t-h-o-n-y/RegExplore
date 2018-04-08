@@ -7,5 +7,9 @@
 int main(int argc, const char* argv[]) {
     cppurses::System sys;
 
+    regex_explore::Regex_explore_widget widg;
+
+    sys.set_head(&widg);
+
     return sys.run();
 }
