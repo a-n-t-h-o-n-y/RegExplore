@@ -1,6 +1,7 @@
 #include <regex_explore/regex_explore_widget.hpp>
 
 #include <cstddef>
+#include <regex>
 #include <string>
 
 #include <cppurses/painter/glyph_string.hpp>
@@ -13,12 +14,50 @@ using cppurses::Glyph_string;
 namespace regex_explore {
 
 Regex_explore_widget::Regex_explore_widget() {
-    // tb_highlight_.text_changed.connect(update_highlights(tb_highlight_));
+    tb_highlight_.text_changed.connect(
+        [this](const auto&) { this->perform_search_and_update(); });
+    top_bar_.regex_enter.regex_edit.text_changed.connect(
+        [this](const auto&) { this->perform_search_and_update(); });
+}
 
-    tb_highlight_.add_range(Range{0, 3});
-    tb_highlight_.add_range(Range{1, 2});
-    tb_highlight_.add_range(Range{6, 1});
-    tb_highlight_.add_range(Range{8, 10});
+// Attach this as a slot to all signals that signal a change to the system from
+// the UI
+void Regex_explore_widget::perform_search_and_update() {
+    // Get regex text
+    std::string regex_str{top_bar_.regex_enter.regex_edit.contents().str()};
+    if (regex_str.empty()) {
+        tb_highlight_.clear_all_highlights();
+        return;
+    }
+
+    // Get regex options
+
+    // Get regex Type
+
+    // Create Regex object with above parameters
+    std::regex regex;
+    try {
+        regex.assign(regex_str);
+    } catch (const std::regex_error& re) {
+        // info box to show invalid regex would be helpful
+    }
+
+    // Get target text
+    std::string target_text{tb_highlight_.contents().str()};
+
+    // Clear the current tb_highlight of ranges.
+    tb_highlight_.clear_all_highlights();
+
+    // Search target text with above regex in a loop
+    for (std::sregex_iterator i{std::sregex_iterator(
+             std::begin(target_text), std::end(target_text), regex)};
+         i != std::sregex_iterator(); ++i) {
+        std::smatch match{*i};
+        Range r{static_cast<std::size_t>(match.position(0)),
+                static_cast<std::size_t>(match.length(0))};
+        tb_highlight_.add_highlight(r);
+        // add sub_matches to some data struct.
+    }
 }
 
 sig::Slot<void(const Glyph_string&)> update_highlights_slot(

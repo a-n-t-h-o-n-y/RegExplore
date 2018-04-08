@@ -1,8 +1,5 @@
 #ifndef REGEX_EXPLORER_TEXTBOX_HIGHLIGHT_HPP
 #define REGEX_EXPLORER_TEXTBOX_HIGHLIGHT_HPP
-#include <cstddef>
-#include <vector>
-
 #include <cppurses/painter/color.hpp>
 #include <cppurses/widget/widgets/textbox.hpp>
 
@@ -16,14 +13,11 @@ class Textbox_highlight : public cppurses::Textbox {
 
     void set_highlight(cppurses::Color color);
 
-    void add_range(const Range& range);
-    void clear_ranges();
-    void remove_range(std::size_t index);
-
-    bool paint_event() override;
+    void add_highlight(const Range& range);
+    void remove_highlight(const Range& range);
+    void clear_all_highlights();
 
    private:
-    std::vector<Range> highlight_ranges_;
     cppurses::Color highlight_color_{cppurses::Color::Yellow};
 
     void add_highlights();  // these two are used by paint_event()

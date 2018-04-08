@@ -1,7 +1,5 @@
 #ifndef REGEX_EXPLORE_REGEX_EXPLORE_WIDGET_HPP
 #define REGEX_EXPLORE_REGEX_EXPLORE_WIDGET_HPP
-#include <regex>
-
 #include <cppurses/widget/layouts/vertical_layout.hpp>
 
 #include <regex_explore/bottom_bar.hpp>
@@ -28,7 +26,7 @@ class Regex_explore_widget : public cppurses::Vertical_layout {
 
     Bottom_bar& bottom_bar_{this->make_child<Bottom_bar>()};
 
-    std::regex regex_;
+    void perform_search_and_update();
 
     // change these sigs to use private vars you already have.
     sig::Slot<void(const cppurses::Glyph_string&)> update_highlights_slot(
