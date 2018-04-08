@@ -3,7 +3,7 @@
 #include <cppurses/widget/layouts/vertical_layout.hpp>
 
 #include <regex_explore/bottom_bar.hpp>
-#include <regex_explore/textbox_highlight.hpp>
+#include <regex_explore/target_text_section.hpp>
 #include <regex_explore/top_bar.hpp>
 
 namespace regex_explore {
@@ -22,7 +22,8 @@ class Regex_explore_widget : public cppurses::Vertical_layout {
 
     // provides a slot to call each time something in top bar is changed, and a
     // signal for text change that should search the text again and rehighlight
-    Textbox_highlight& tb_highlight_{this->make_child<Textbox_highlight>()};
+    Target_text_section& target_text_section_{
+        this->make_child<Target_text_section>()};
 
     Bottom_bar& bottom_bar_{this->make_child<Bottom_bar>()};
 

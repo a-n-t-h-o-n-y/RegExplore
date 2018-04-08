@@ -7,6 +7,7 @@ set(CMAKE_BUILD_TYPE Debug)
 # LIBRARY
 add_library(regex_explore STATIC
     src/top_bar.cpp
+    src/target_text_section.cpp
     src/bottom_bar.cpp
     src/textbox_highlight.cpp
     src/regex_explore_widget.cpp
