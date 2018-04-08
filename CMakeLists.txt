@@ -7,9 +7,11 @@ set(CMAKE_BUILD_TYPE Debug)
 # LIBRARY
 add_library(regex_explore STATIC
     src/top_bar.cpp
+    src/bottom_bar.cpp
     src/textbox_highlight.cpp
     src/regex_explore_widget.cpp
 )
+
 target_compile_options(regex_explore PUBLIC -Wall)
 target_compile_features(regex_explore PUBLIC cxx_std_14)
 target_link_libraries(regex_explore PUBLIC ncurses

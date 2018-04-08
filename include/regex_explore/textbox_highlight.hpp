@@ -6,12 +6,9 @@
 #include <cppurses/painter/color.hpp>
 #include <cppurses/widget/widgets/textbox.hpp>
 
-namespace regex_explore {
+#include <regex_explore/range.hpp>
 
-struct Range {
-    std::size_t index;
-    std::size_t length;
-}
+namespace regex_explore {
 
 class Textbox_highlight : public cppurses::Textbox {
    public:
@@ -27,10 +24,10 @@ class Textbox_highlight : public cppurses::Textbox {
 
    private:
     std::vector<Range> highlight_ranges_;
-    cppurses::Color highlight_color_;
+    cppurses::Color highlight_color_{cppurses::Color::Yellow};
 
-    add_highlights(); // these two are used by paint_event()
-    remove_highlights();
+    void add_highlights();  // these two are used by paint_event()
+    void remove_highlights();
 };
 
 // main widget will connection the text_changed signal from this guy^ to a
