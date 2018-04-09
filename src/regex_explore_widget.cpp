@@ -30,6 +30,7 @@ Regex_explore_widget::Regex_explore_widget() {
 
     target_text_section_.height_policy.stretch(3);
 
+    // Regex Type Select
     top_bar_.regex_type_select.select_box.add_option("ECMAScript")
         .connect([this] {
             regex_type_ = std::regex::ECMAScript;
@@ -61,24 +62,57 @@ Regex_explore_widget::Regex_explore_widget() {
         regex_type_ = std::regex::egrep;
         this->perform_search_and_update();
     });
+
+    // Options Box
+    bottom_bar_.options_box.case_insensitive.checked.connect([this] {
+        this->set_option(std::regex::icase);
+        this->perform_search_and_update();
+    });
+    bottom_bar_.options_box.case_insensitive.unchecked.connect([this] {
+        this->unset_option(std::regex::icase);
+        this->perform_search_and_update();
+    });
+
+    bottom_bar_.options_box.no_subexpressions.checked.connect([this] {
+        this->set_option(std::regex::nosubs);
+        this->perform_search_and_update();
+    });
+    bottom_bar_.options_box.no_subexpressions.unchecked.connect([this] {
+        this->unset_option(std::regex::nosubs);
+        this->perform_search_and_update();
+    });
+
+    bottom_bar_.options_box.optimize.checked.connect([this] {
+        this->set_option(std::regex::optimize);
+        this->perform_search_and_update();
+    });
+    bottom_bar_.options_box.optimize.unchecked.connect([this] {
+        this->unset_option(std::regex::optimize);
+        this->perform_search_and_update();
+    });
+
+    bottom_bar_.options_box.collate.checked.connect([this] {
+        this->set_option(std::regex::collate);
+        this->perform_search_and_update();
+    });
+    bottom_bar_.options_box.collate.unchecked.connect([this] {
+        this->unset_option(std::regex::collate);
+        this->perform_search_and_update();
+    });
 }
 
 // Attach this as a slot to all signals that signal a change to the system from
 // the UI
 void Regex_explore_widget::perform_search_and_update() {
-    // Get regex text
+    // Get regex text.
     std::string regex_str{top_bar_.regex_enter.regex_edit.contents().str()};
 
-    // Get regex options
-
-    // Create Regex object with above parameters
+    // Create Regex object from flags.
     std::regex regex;
     top_bar_.regex_enter.regex_edit.brush.remove_background();
     this->update();
     std::regex::flag_type flags{regex_type_};
-    if (regex_options_) {
-        flags |= *regex_options_;
-    }
+    flags |= regex_options_;
     try {
         regex.assign(regex_str, flags);
     } catch (const std::regex_error& re) {
@@ -86,7 +120,7 @@ void Regex_explore_widget::perform_search_and_update() {
                                  cppurses::Color::Red);
     }
 
-    // Get target text
+    // Get target text.
     std::string target_text{target_text_section_.tb_highlight.contents().str()};
 
     // Clear the current tb_highlight of ranges.
@@ -112,6 +146,14 @@ void Regex_explore_widget::perform_search_and_update() {
         }
         bottom_bar_.submatch_display.add_match(match_data);
     }
+}
+
+void Regex_explore_widget::unset_option(std::regex::flag_type option) {
+    regex_options_ &= ~option;
+}
+
+void Regex_explore_widget::set_option(std::regex::flag_type option) {
+    regex_options_ |= option;
 }
 
 }  // namespace regex_explore

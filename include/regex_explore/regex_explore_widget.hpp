@@ -3,7 +3,6 @@
 #include <regex>
 
 #include <cppurses/widget/layouts/vertical_layout.hpp>
-#include <optional/optional.hpp>
 
 #include <regex_explore/bottom_bar.hpp>
 #include <regex_explore/target_text_section.hpp>
@@ -26,9 +25,12 @@ class Regex_explore_widget : public cppurses::Vertical_layout {
 
     void perform_search_and_update();
 
+    void unset_option(std::regex::flag_type option);
+    void set_option(std::regex::flag_type option);
+
     // Regex Parameters
     std::regex::flag_type regex_type_{std::regex::ECMAScript};
-    opt::Optional<std::regex::flag_type> regex_options_;
+    std::regex::flag_type regex_options_{static_cast<std::regex::flag_type>(0)};
 };
 
 }  // namespace regex_explore
