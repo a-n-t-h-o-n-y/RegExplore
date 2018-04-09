@@ -6,9 +6,11 @@
 #include <regex_explore/submatch_display.hpp>
 
 namespace regex_explore {
+class Textbox_highlight;
+
 struct Bottom_bar : cppurses::Horizontal_layout {
-    Bottom_bar();
-    Submatch_display& submatch_display{this->make_child<Submatch_display>()};
+    Bottom_bar(const Textbox_highlight*);
+    Submatch_display& submatch_display;
     cppurses::Text_display& options_box{
         this->make_child<cppurses::Text_display>("Options Box")};
 };

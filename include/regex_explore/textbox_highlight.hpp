@@ -1,7 +1,10 @@
 #ifndef REGEX_EXPLORER_TEXTBOX_HIGHLIGHT_HPP
 #define REGEX_EXPLORER_TEXTBOX_HIGHLIGHT_HPP
+#include <cstdint>
+
 #include <cppurses/painter/color.hpp>
 #include <cppurses/widget/widgets/textbox.hpp>
+#include <signals/signals.hpp>
 
 #include <regex_explore/range.hpp>
 
@@ -16,6 +19,13 @@ class Textbox_highlight : public cppurses::Textbox {
     void add_highlight(const Range& range);
     void remove_highlight(const Range& range);
     void clear_all_highlights();
+
+    bool mouse_press_event(cppurses::Mouse_button button,
+                           cppurses::Point global,
+                           cppurses::Point local,
+                           std::uint8_t device_id) override;
+
+    sig::Signal<void(std::size_t)> clicked_at_index;
 
    private:
     cppurses::Color highlight_color_{cppurses::Color::Yellow};

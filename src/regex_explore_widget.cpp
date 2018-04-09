@@ -10,6 +10,8 @@
 #include <regex_explore/match.hpp>
 #include <regex_explore/textbox_highlight.hpp>
 
+#include <utility/log.hpp>  // temp
+
 using cppurses::Glyph_string;
 
 namespace regex_explore {
@@ -19,6 +21,12 @@ Regex_explore_widget::Regex_explore_widget() {
         [this](const auto&) { this->perform_search_and_update(); });
     top_bar_.regex_enter.regex_edit.text_changed.connect(
         [this](const auto&) { this->perform_search_and_update(); });
+
+    // Submatch selection
+    target_text_section_.tb_highlight.clicked_at_index.connect(
+        [this](std::size_t text_index) {
+            bottom_bar_.submatch_display.set_match_from_text_index(text_index);
+        });
 
     target_text_section_.height_policy.stretch(3);
 }
@@ -64,11 +72,16 @@ void Regex_explore_widget::perform_search_and_update() {
 
         // Submatches
         Match match_data{range_entire};
+        utility::Log l;
+        l << "match size(over 1 has submatches): " << match.size() << std::endl;
         for (std::size_t i{1}; i < match.size(); ++i) {
             Range sub_range{static_cast<std::size_t>(match.position(i)),
                             static_cast<std::size_t>(match.length(i))};
+            l << "subrange position: " << sub_range.index << std::endl;
+            l << "subrange length: " << sub_range.length << std::endl;
             match_data.submatches.push_back(sub_range);
         }
+        bottom_bar_.submatch_display.add_match(match_data);
     }
 }
 

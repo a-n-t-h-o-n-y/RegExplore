@@ -25,7 +25,8 @@ class Regex_explore_widget : public cppurses::Vertical_layout {
     Target_text_section& target_text_section_{
         this->make_child<Target_text_section>()};
 
-    Bottom_bar& bottom_bar_{this->make_child<Bottom_bar>()};
+    Bottom_bar& bottom_bar_{
+        this->make_child<Bottom_bar>(&target_text_section_.tb_highlight)};
 
     void perform_search_and_update();
 

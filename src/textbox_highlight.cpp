@@ -42,4 +42,14 @@ void Textbox_highlight::clear_all_highlights() {
     this->update();
 }
 
+bool Textbox_highlight::mouse_press_event(cppurses::Mouse_button button,
+                                          cppurses::Point global,
+                                          cppurses::Point local,
+                                          std::uint8_t device_id) {
+    if (button == cppurses::Mouse_button::Left) {
+        clicked_at_index(this->index_at(local));
+    }
+    return cppurses::Textbox::mouse_press_event(button, global, local,
+                                                device_id);
+}
 }  // namespace regex_explore

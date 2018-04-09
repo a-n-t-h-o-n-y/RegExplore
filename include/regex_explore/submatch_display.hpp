@@ -13,10 +13,11 @@ class Textbox_highlight;
 
 class Submatch_display : public cppurses::Text_display {
    public:
-    Submatch_display();
+    Submatch_display(const Textbox_highlight* highlight_box);
     void add_match(const Match& m);
     void clear_all_matches();
     void set_current_match(std::size_t index);
+    void set_match_from_text_index(std::size_t text_index);
     std::size_t size() const;
 
    private:
