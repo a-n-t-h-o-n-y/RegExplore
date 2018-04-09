@@ -75,8 +75,12 @@ void Regex_explore_widget::perform_search_and_update() {
     std::regex regex;
     top_bar_.regex_enter.regex_edit.brush.remove_background();
     this->update();
+    std::regex::flag_type flags{regex_type_};
+    if (regex_options_) {
+        flags |= *regex_options_;
+    }
     try {
-        regex.assign(regex_str, regex_type_);
+        regex.assign(regex_str, flags);
     } catch (const std::regex_error& re) {
         cppurses::set_background(top_bar_.regex_enter.regex_edit,
                                  cppurses::Color::Red);
