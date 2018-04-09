@@ -3,8 +3,8 @@
 namespace regex_explore {
 
 Bottom_bar::Bottom_bar() {
-    cppurses::enable_border(sub_matches_);
-    cppurses::enable_border(match_info_);
+    cppurses::enable_border(submatch_display);
+    cppurses::enable_border(options_box);
 }
 
 }  // namespace regex_explore

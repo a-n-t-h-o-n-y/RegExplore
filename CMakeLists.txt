@@ -11,6 +11,7 @@ add_library(regex_explore STATIC
     src/bottom_bar.cpp
     src/textbox_highlight.cpp
     src/regex_explore_widget.cpp
+    src/submatch_display.cpp
 )
 
 target_compile_options(regex_explore PUBLIC -Wall)
