@@ -12,13 +12,6 @@ Regex_enter::Regex_enter() {
 Regex_type_select::Regex_type_select() {
     label.width_policy.type(cppurses::Size_policy::Fixed);
     label.width_policy.hint(6);
-
-    select_box.add_option("ECMAScript");
-    select_box.add_option("basic");
-    select_box.add_option("extended");
-    select_box.add_option("awk");
-    select_box.add_option("grep");
-    select_box.add_option("egrep");
 }
 
 Top_bar::Top_bar() {

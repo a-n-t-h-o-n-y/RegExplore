@@ -1,5 +1,7 @@
 #ifndef REGEX_EXPLORE_REGEX_EXPLORE_WIDGET_HPP
 #define REGEX_EXPLORE_REGEX_EXPLORE_WIDGET_HPP
+#include <regex>
+
 #include <cppurses/widget/layouts/vertical_layout.hpp>
 
 #include <regex_explore/bottom_bar.hpp>
@@ -29,6 +31,9 @@ class Regex_explore_widget : public cppurses::Vertical_layout {
         this->make_child<Bottom_bar>(&target_text_section_.tb_highlight)};
 
     void perform_search_and_update();
+
+    // Regex Parameters
+    typename std::regex::flag_type regex_type_{std::regex::ECMAScript};
 
     // change these sigs to use private vars you already have.
     // sig::Slot<void(const cppurses::Glyph_string&)> update_highlights_slot(

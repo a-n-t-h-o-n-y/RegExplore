@@ -4,7 +4,9 @@
 #include <regex>
 #include <string>
 
+#include <cppurses/painter/color.hpp>
 #include <cppurses/painter/glyph_string.hpp>
+#include <cppurses/widget/widget.hpp>
 #include <signals/slot.hpp>
 
 #include <regex_explore/match.hpp>
@@ -27,6 +29,38 @@ Regex_explore_widget::Regex_explore_widget() {
         });
 
     target_text_section_.height_policy.stretch(3);
+
+    top_bar_.regex_type_select.select_box.add_option("ECMAScript")
+        .connect([this] {
+            regex_type_ = std::regex::ECMAScript;
+            this->perform_search_and_update();
+        });
+
+    top_bar_.regex_type_select.select_box.add_option("basic").connect([this] {
+        regex_type_ = std::regex::basic;
+        this->perform_search_and_update();
+    });
+
+    top_bar_.regex_type_select.select_box.add_option("extended")
+        .connect([this] {
+            regex_type_ = std::regex::extended;
+            this->perform_search_and_update();
+        });
+
+    top_bar_.regex_type_select.select_box.add_option("awk").connect([this] {
+        regex_type_ = std::regex::awk;
+        this->perform_search_and_update();
+    });
+
+    top_bar_.regex_type_select.select_box.add_option("grep").connect([this] {
+        regex_type_ = std::regex::grep;
+        this->perform_search_and_update();
+    });
+
+    top_bar_.regex_type_select.select_box.add_option("egrep").connect([this] {
+        regex_type_ = std::regex::egrep;
+        this->perform_search_and_update();
+    });
 }
 
 // Attach this as a slot to all signals that signal a change to the system from
@@ -34,21 +68,18 @@ Regex_explore_widget::Regex_explore_widget() {
 void Regex_explore_widget::perform_search_and_update() {
     // Get regex text
     std::string regex_str{top_bar_.regex_enter.regex_edit.contents().str()};
-    if (regex_str.empty()) {
-        target_text_section_.tb_highlight.clear_all_highlights();
-        return;
-    }
 
     // Get regex options
 
-    // Get regex Type
-
     // Create Regex object with above parameters
     std::regex regex;
+    top_bar_.regex_enter.regex_edit.brush.remove_background();
+    this->update();
     try {
-        regex.assign(regex_str);
+        regex.assign(regex_str, regex_type_);
     } catch (const std::regex_error& re) {
-        // info box to show invalid regex would be helpful
+        cppurses::set_background(top_bar_.regex_enter.regex_edit,
+                                 cppurses::Color::Red);
     }
 
     // Get target text
@@ -91,14 +122,14 @@ void Regex_explore_widget::perform_search_and_update() {
 
 // void Regex_explore_widget::update_highlights(Textbox_highlight& box,
 //                                              const std::string& text) {
-    // std::match_results result{regex_.search(text)};  // just a guess, not
-    // right box.clear_ranges(); for (std::sub_result sr : result) {
-    //     // calculate index
-    //     std::size_t index{};
-    //     // calculate length
-    //     std::size_t length{};
-    //     box.add_range(Range{index, length});
-    // }
+// std::match_results result{regex_.search(text)};  // just a guess, not
+// right box.clear_ranges(); for (std::sub_result sr : result) {
+//     // calculate index
+//     std::size_t index{};
+//     // calculate length
+//     std::size_t length{};
+//     box.add_range(Range{index, length});
+// }
 // }
 
 }  // namespace regex_explore
