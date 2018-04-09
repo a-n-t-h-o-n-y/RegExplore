@@ -12,6 +12,9 @@ add_library(regex_explore STATIC
     src/textbox_highlight.cpp
     src/regex_explore_widget.cpp
     src/submatch_display.cpp
+    src/options_page.cpp
+    src/reference_page.cpp
+    src/options_and_reference.cpp
 )
 
 target_compile_options(regex_explore PUBLIC -Wall)

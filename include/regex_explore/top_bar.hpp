@@ -1,8 +1,8 @@
-#ifndef REGEX_EXPLORER_TOP_BAR_HPP
-#define REGEX_EXPLORER_TOP_BAR_HPP
+#ifndef REGEX_EXPLORE_TOP_BAR_HPP
+#define REGEX_EXPLORE_TOP_BAR_HPP
 #include <cppurses/widget/layouts/horizontal_layout.hpp>
-#include <cppurses/widget/widgets/cycle_box.hpp>
 #include <cppurses/widget/widgets/label.hpp>
+#include <cppurses/widget/widgets/labeled_cycle_box.hpp>
 #include <cppurses/widget/widgets/line_edit.hpp>
 
 namespace regex_explore {
@@ -14,17 +14,12 @@ struct Regex_enter : cppurses::Horizontal_layout {
         this->make_child<cppurses::Line_edit>(R"(\d\d\d)")};
 };
 
-struct Regex_type_select : cppurses::Horizontal_layout {
-    Regex_type_select();
-    cppurses::Label& label{this->make_child<cppurses::Label>("Type:")};
-    cppurses::Cycle_box& select_box{this->make_child<cppurses::Cycle_box>()};
-};
-
 struct Top_bar : cppurses::Horizontal_layout {
     Top_bar();
     Regex_enter& regex_enter{this->make_child<Regex_enter>()};
-    Regex_type_select& regex_type_select{this->make_child<Regex_type_select>()};
+    cppurses::Labeled_cycle_box& regex_type_select{
+        this->make_child<cppurses::Labeled_cycle_box>("Type")};
 };
 
 }  // namespace regex_explore
-#endif  // REGEX_EXPLORER_TOP_BAR_HPP
+#endif  // REGEX_EXPLORE_TOP_BAR_HPP

@@ -31,71 +31,71 @@ Regex_explore_widget::Regex_explore_widget() {
     target_text_section_.height_policy.stretch(3);
 
     // Regex Type Select
-    top_bar_.regex_type_select.select_box.add_option("ECMAScript")
+    top_bar_.regex_type_select.cycle_box.add_option("ECMAScript")
         .connect([this] {
             regex_type_ = std::regex::ECMAScript;
             this->perform_search_and_update();
         });
 
-    top_bar_.regex_type_select.select_box.add_option("basic").connect([this] {
+    top_bar_.regex_type_select.cycle_box.add_option("basic").connect([this] {
         regex_type_ = std::regex::basic;
         this->perform_search_and_update();
     });
 
-    top_bar_.regex_type_select.select_box.add_option("extended")
-        .connect([this] {
-            regex_type_ = std::regex::extended;
-            this->perform_search_and_update();
-        });
+    top_bar_.regex_type_select.cycle_box.add_option("extended").connect([this] {
+        regex_type_ = std::regex::extended;
+        this->perform_search_and_update();
+    });
 
-    top_bar_.regex_type_select.select_box.add_option("awk").connect([this] {
+    top_bar_.regex_type_select.cycle_box.add_option("awk").connect([this] {
         regex_type_ = std::regex::awk;
         this->perform_search_and_update();
     });
 
-    top_bar_.regex_type_select.select_box.add_option("grep").connect([this] {
+    top_bar_.regex_type_select.cycle_box.add_option("grep").connect([this] {
         regex_type_ = std::regex::grep;
         this->perform_search_and_update();
     });
 
-    top_bar_.regex_type_select.select_box.add_option("egrep").connect([this] {
+    top_bar_.regex_type_select.cycle_box.add_option("egrep").connect([this] {
         regex_type_ = std::regex::egrep;
         this->perform_search_and_update();
     });
 
     // Options Box
-    bottom_bar_.options_box.case_insensitive.checked.connect([this] {
+    auto& opt_box = bottom_bar_.options_and_reference.options_page.options_box;
+    opt_box.case_insensitive.checked.connect([this] {
         this->set_option(std::regex::icase);
         this->perform_search_and_update();
     });
-    bottom_bar_.options_box.case_insensitive.unchecked.connect([this] {
+    opt_box.case_insensitive.unchecked.connect([this] {
         this->unset_option(std::regex::icase);
         this->perform_search_and_update();
     });
 
-    bottom_bar_.options_box.no_subexpressions.checked.connect([this] {
+    opt_box.no_subexpressions.checked.connect([this] {
         this->set_option(std::regex::nosubs);
         this->perform_search_and_update();
     });
-    bottom_bar_.options_box.no_subexpressions.unchecked.connect([this] {
+    opt_box.no_subexpressions.unchecked.connect([this] {
         this->unset_option(std::regex::nosubs);
         this->perform_search_and_update();
     });
 
-    bottom_bar_.options_box.optimize.checked.connect([this] {
+    opt_box.optimize.checked.connect([this] {
         this->set_option(std::regex::optimize);
         this->perform_search_and_update();
     });
-    bottom_bar_.options_box.optimize.unchecked.connect([this] {
+    opt_box.optimize.unchecked.connect([this] {
         this->unset_option(std::regex::optimize);
         this->perform_search_and_update();
     });
 
-    bottom_bar_.options_box.collate.checked.connect([this] {
+    opt_box.collate.checked.connect([this] {
         this->set_option(std::regex::collate);
         this->perform_search_and_update();
     });
-    bottom_bar_.options_box.collate.unchecked.connect([this] {
+    opt_box.collate.unchecked.connect([this] {
         this->unset_option(std::regex::collate);
         this->perform_search_and_update();
     });

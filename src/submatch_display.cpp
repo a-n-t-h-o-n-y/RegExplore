@@ -14,6 +14,7 @@ namespace regex_explore {
 Submatch_display::Submatch_display(const Textbox_highlight* highlight_box)
     : text_widg_{highlight_box} {
     this->cppurses::Textbox::disable_input();
+    cppurses::enable_border(*this);
 }
 
 void Submatch_display::add_match(const Match& m) {
