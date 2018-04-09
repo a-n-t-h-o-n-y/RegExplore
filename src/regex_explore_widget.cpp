@@ -10,8 +10,6 @@
 #include <regex_explore/match.hpp>
 #include <regex_explore/textbox_highlight.hpp>
 
-#include <utility/log.hpp>  // temp
-
 using cppurses::Glyph_string;
 
 namespace regex_explore {
@@ -72,31 +70,27 @@ void Regex_explore_widget::perform_search_and_update() {
 
         // Submatches
         Match match_data{range_entire};
-        utility::Log l;
-        l << "match size(over 1 has submatches): " << match.size() << std::endl;
         for (std::size_t i{1}; i < match.size(); ++i) {
             Range sub_range{static_cast<std::size_t>(match.position(i)),
                             static_cast<std::size_t>(match.length(i))};
-            l << "subrange position: " << sub_range.index << std::endl;
-            l << "subrange length: " << sub_range.length << std::endl;
             match_data.submatches.push_back(sub_range);
         }
         bottom_bar_.submatch_display.add_match(match_data);
     }
 }
 
-sig::Slot<void(const Glyph_string&)> update_highlights_slot(
-    Textbox_highlight& box) {
-    auto lam = [&box](const cppurses::Glyph_string& text) {
-        // update_highlights(box, text.str());
-    };
-    sig::Slot<void(const Glyph_string&)> result{lam};
-    result.track(box.destroyed);
-    return result;
-}
+// sig::Slot<void(const Glyph_string&)> update_highlights_slot(
+//     Textbox_highlight& box) {
+//     auto lam = [&box](const cppurses::Glyph_string& text) {
+//         // update_highlights(box, text.str());
+//     };
+//     sig::Slot<void(const Glyph_string&)> result{lam};
+//     result.track(box.destroyed);
+//     return result;
+// }
 
-void Regex_explore_widget::update_highlights(Textbox_highlight& box,
-                                             const std::string& text) {
+// void Regex_explore_widget::update_highlights(Textbox_highlight& box,
+//                                              const std::string& text) {
     // std::match_results result{regex_.search(text)};  // just a guess, not
     // right box.clear_ranges(); for (std::sub_result sr : result) {
     //     // calculate index
@@ -105,6 +99,6 @@ void Regex_explore_widget::update_highlights(Textbox_highlight& box,
     //     std::size_t length{};
     //     box.add_range(Range{index, length});
     // }
-}
+// }
 
 }  // namespace regex_explore

@@ -2,6 +2,8 @@
 
 #include <cstddef>
 
+#include <cppurses/painter/attribute.hpp>
+#include <cppurses/painter/brush.hpp>
 #include <cppurses/painter/glyph.hpp>
 
 #include <regex_explore/range.hpp>
@@ -23,6 +25,10 @@ void Textbox_highlight::add_highlight(const Range& range) {
         if (highlight_index < this->contents_size()) {
             this->glyph_at(highlight_index)
                 .brush.set_background(highlight_color_);
+            if (i == 0) {
+                this->glyph_at(highlight_index)
+                    .brush.add_attributes(cppurses::Attribute::Underline);
+            }
         }
     }
     this->update();
@@ -33,6 +39,7 @@ void Textbox_highlight::remove_highlight(const Range& range) {
         std::size_t highlight_index{range.index + i};
         if (highlight_index < this->contents_size()) {
             this->glyph_at(highlight_index).brush.remove_background();
+            this->glyph_at(highlight_index).brush.clear_attributes();
         }
     }
 }

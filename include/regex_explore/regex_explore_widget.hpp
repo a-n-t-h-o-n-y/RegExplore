@@ -31,9 +31,9 @@ class Regex_explore_widget : public cppurses::Vertical_layout {
     void perform_search_and_update();
 
     // change these sigs to use private vars you already have.
-    sig::Slot<void(const cppurses::Glyph_string&)> update_highlights_slot(
-        Textbox_highlight& box);
-    void update_highlights(Textbox_highlight& box, const std::string& text);
+    // sig::Slot<void(const cppurses::Glyph_string&)> update_highlights_slot(
+    //     Textbox_highlight& box);
+    // void update_highlights(Textbox_highlight& box, const std::string& text);
 };
 
 }  // namespace regex_explore

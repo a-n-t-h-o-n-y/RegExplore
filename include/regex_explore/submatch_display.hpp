@@ -1,6 +1,6 @@
 #ifndef REGEX_EXPLORE_SUBMATCH_DISPLAY_HPP
 #define REGEX_EXPLORE_SUBMATCH_DISPLAY_HPP
-#include <cppurses/widget/widgets/text_display.hpp>
+#include <cppurses/widget/widgets/textbox.hpp>
 
 #include <cstddef>
 #include <string>
@@ -11,7 +11,7 @@ namespace regex_explore {
 struct Range;
 class Textbox_highlight;
 
-class Submatch_display : public cppurses::Text_display {
+class Submatch_display : public cppurses::Textbox {
    public:
     Submatch_display(const Textbox_highlight* highlight_box);
     void add_match(const Match& m);
