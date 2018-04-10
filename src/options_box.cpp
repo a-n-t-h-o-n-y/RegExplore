@@ -6,7 +6,7 @@ namespace regex_explore {
 
 Options_box::Options_box() {
     cppurses::set_background(label, cppurses::Color::Light_gray);
-    cppurses::set_foreground(label, cppurses::Color::Dark_blue);
+    cppurses::set_foreground(label, cppurses::Color::Black);
 
     label.set_alignment(cppurses::Alignment::Center);
 }

@@ -12,7 +12,7 @@ Match_page::Match_page(const Textbox_highlight* highlight_box)
     cppurses::enable_border(*this);
 
     cppurses::set_background(label, cppurses::Color::Light_gray);
-    cppurses::set_foreground(label, cppurses::Color::Dark_blue);
+    cppurses::set_foreground(label, cppurses::Color::Black);
 
     label.set_alignment(cppurses::Alignment::Center);
 }

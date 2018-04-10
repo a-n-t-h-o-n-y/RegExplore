@@ -1,5 +1,6 @@
 #include <regex_explore/top_bar.hpp>
 
+#include <cppurses/painter/color.hpp>
 #include <cppurses/widget/size_policy.hpp>
 
 namespace regex_explore {
@@ -7,6 +8,8 @@ namespace regex_explore {
 Regex_enter::Regex_enter() {
     label.width_policy.type(cppurses::Size_policy::Fixed);
     label.width_policy.hint(7);
+
+    regex_edit.set_ghost_color(cppurses::Color::Light_gray);
 }
 
 Top_bar::Top_bar() {

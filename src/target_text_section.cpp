@@ -2,6 +2,8 @@
 #include <streambuf>
 #include <string>
 
+#include <cppurses/painter/color.hpp>
+
 #include <regex_explore/target_text_section.hpp>
 
 namespace regex_explore {
@@ -13,8 +15,9 @@ Target_text_section::Target_text_section() {
         tb_highlight.set_text(contents);
     });
 
-    // change colors
-    // open_file....
+    cppurses::set_background(open_file.filename_edit, cppurses::Color::Black);
+    cppurses::set_foreground(open_file.filename_edit, cppurses::Color::White);
+    open_file.filename_edit.set_ghost_color(cppurses::Color::Light_gray);
 }
 
 }  // namespace regex_explore
