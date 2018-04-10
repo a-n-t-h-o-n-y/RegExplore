@@ -17,14 +17,14 @@ using cppurses::Glyph_string;
 namespace regex_explore {
 
 Regex_explore_widget::Regex_explore_widget() {
-    target_text_section_.tb_highlight.text_changed.connect(
+    target_text_section_.highlight_and_scroll.tb_highlight.text_changed.connect(
         [this](const auto&) { this->perform_search_and_update(); });
     top_bar_.regex_enter.regex_edit.text_changed.connect(
         [this](const auto&) { this->perform_search_and_update(); });
 
     // Submatch selection
-    target_text_section_.tb_highlight.clicked_at_index.connect(
-        [this](std::size_t text_index) {
+    target_text_section_.highlight_and_scroll.tb_highlight.clicked_at_index
+        .connect([this](std::size_t text_index) {
             bottom_bar_.match_page.submatch_display.set_match_from_text_index(
                 text_index);
         });
@@ -122,10 +122,13 @@ void Regex_explore_widget::perform_search_and_update() {
     }
 
     // Get target text.
-    std::string target_text{target_text_section_.tb_highlight.contents().str()};
+    std::string target_text{
+        target_text_section_.highlight_and_scroll.tb_highlight.contents()
+            .str()};
 
     // Clear the current tb_highlight of ranges.
-    target_text_section_.tb_highlight.clear_all_highlights();
+    target_text_section_.highlight_and_scroll.tb_highlight
+        .clear_all_highlights();
     bottom_bar_.match_page.submatch_display.clear_all_matches();
 
     // Search target text with above regex in a loop
@@ -136,7 +139,8 @@ void Regex_explore_widget::perform_search_and_update() {
         // Entire Match
         Range range_entire{static_cast<std::size_t>(match.position(0)),
                            static_cast<std::size_t>(match.length(0))};
-        target_text_section_.tb_highlight.add_highlight(range_entire);
+        target_text_section_.highlight_and_scroll.tb_highlight.add_highlight(
+            range_entire);
 
         // Submatches
         Match match_data{range_entire};

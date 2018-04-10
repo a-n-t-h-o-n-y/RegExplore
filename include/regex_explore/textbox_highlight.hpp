@@ -3,7 +3,9 @@
 #include <cstdint>
 
 #include <cppurses/painter/color.hpp>
+#include <cppurses/widget/layouts/horizontal_layout.hpp>
 #include <cppurses/widget/widgets/textbox.hpp>
+#include <cppurses/widget/widgets/vertical_scrollbar.hpp>
 #include <signals/signals.hpp>
 
 #include <regex_explore/range.hpp>
@@ -34,10 +36,11 @@ class Textbox_highlight : public cppurses::Textbox {
     void remove_highlights();
 };
 
-// main widget will connection the text_changed signal from this guy^ to a
-// function that (1) calculates the new search results from the regex.
-// (2) calls clear_ranges() on this guy and then adds each range in
-// from the results that it finds from the regex.
+struct Highlight_and_scroll : cppurses::Horizontal_layout {
+    Textbox_highlight& tb_highlight{this->make_child<Textbox_highlight>()};
+    cppurses::Vertical_scrollbar& scrollbar{
+        this->make_child<cppurses::Vertical_scrollbar>(tb_highlight)};
+};
 
 }  // namespace regex_explore
 #endif  // REGEX_EXPLORER_TEXTBOX_HIGHLIGHT_HPP

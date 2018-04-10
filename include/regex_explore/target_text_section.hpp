@@ -9,7 +9,9 @@ namespace regex_explore {
 
 struct Target_text_section : cppurses::Vertical_layout {
     Target_text_section();
-    Textbox_highlight& tb_highlight{this->make_child<Textbox_highlight>()};
+
+    Highlight_and_scroll& highlight_and_scroll{
+        this->make_child<Highlight_and_scroll>()};
     cppurses::Open_file<>& open_file{this->make_child<cppurses::Open_file<>>()};
 };
 
