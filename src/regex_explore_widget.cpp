@@ -102,11 +102,17 @@ Regex_explore_widget::Regex_explore_widget() {
     });
 }
 
-// Attach this as a slot to all signals that signal a change to the system from
-// the UI
 void Regex_explore_widget::perform_search_and_update() {
     // Get regex text.
     std::string regex_str{top_bar_.regex_enter.regex_edit.contents().str()};
+    if (regex_str.empty()) {
+        target_text_section_.highlight_and_scroll.tb_highlight
+            .clear_all_highlights();
+        bottom_bar_.match_page.submatch_display.clear_all_matches();
+        top_bar_.regex_enter.regex_edit.brush.remove_background();
+        bottom_bar_.match_page.set_match_count(0);
+        return;
+    }
 
     // Create Regex object from flags.
     std::regex regex;
@@ -132,6 +138,7 @@ void Regex_explore_widget::perform_search_and_update() {
     bottom_bar_.match_page.submatch_display.clear_all_matches();
 
     // Search target text with above regex in a loop
+    std::size_t match_count{0};
     for (std::sregex_iterator i{std::sregex_iterator(
              std::begin(target_text), std::end(target_text), regex)};
          i != std::sregex_iterator(); ++i) {
@@ -141,6 +148,7 @@ void Regex_explore_widget::perform_search_and_update() {
                            static_cast<std::size_t>(match.length(0))};
         target_text_section_.highlight_and_scroll.tb_highlight.add_highlight(
             range_entire);
+        ++match_count;
 
         // Submatches
         Match match_data{range_entire};
@@ -151,6 +159,7 @@ void Regex_explore_widget::perform_search_and_update() {
         }
         bottom_bar_.match_page.submatch_display.add_match(match_data);
     }
+    bottom_bar_.match_page.set_match_count(match_count);
 }
 
 void Regex_explore_widget::unset_option(std::regex::flag_type option) {

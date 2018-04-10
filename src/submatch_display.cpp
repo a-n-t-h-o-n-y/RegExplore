@@ -15,8 +15,6 @@ namespace regex_explore {
 Submatch_display::Submatch_display(const Textbox_highlight* highlight_box)
     : text_widg_{highlight_box} {
     this->cppurses::Textbox::disable_input();
-    // cppurses::set_background(*this, cppurses::Color::Blue);
-    // cppurses::set_foreground(*this, cppurses::Color::Black);
 }
 
 void Submatch_display::add_match(const Match& m) {
@@ -61,6 +59,7 @@ std::string Submatch_display::retrieve_text(const Range& range) {
 std::string Submatch_display::build_text(std::size_t index) {
     std::stringstream ss;
     // Entire Match
+    ss << "Entire Match: ";
     ss << this->retrieve_text(matches_[index].entire);
     ss << '\n';
 

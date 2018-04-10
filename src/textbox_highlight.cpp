@@ -13,10 +13,6 @@ namespace regex_explore {
 Textbox_highlight::Textbox_highlight() : Textbox("Target Text") {
     cppurses::set_background(*this, cppurses::Color::White);
     cppurses::set_foreground(*this, cppurses::Color::Black);
-    // cppurses::disable_corners(this->border);
-    // cppurses::disable_walls(this->border);
-    // this->border.south_enabled = true;
-    // cppurses::enable_border(*this);
 }
 
 void Textbox_highlight::set_highlight(cppurses::Color color) {

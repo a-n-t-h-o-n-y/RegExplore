@@ -10,8 +10,9 @@ class Textbox_highlight;
 
 struct Match_page : cppurses::Vertical_layout {
     Match_page(const Textbox_highlight* highlight_box);
+    void set_match_count(std::size_t count);
 
-    cppurses::Label& label{this->make_child<cppurses::Label>("Matches")};
+    cppurses::Label& label{this->make_child<cppurses::Label>("Matches(0)")};
     Submatch_display& submatch_display;
 };
 
