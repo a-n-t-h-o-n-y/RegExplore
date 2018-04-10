@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 
+#include <cppurses/painter/color.hpp>
 #include <cppurses/painter/utility/wchar_to_bytes.hpp>
 #include <cppurses/widget/widgets/textbox.hpp>
 
@@ -14,7 +15,8 @@ namespace regex_explore {
 Submatch_display::Submatch_display(const Textbox_highlight* highlight_box)
     : text_widg_{highlight_box} {
     this->cppurses::Textbox::disable_input();
-    cppurses::enable_border(*this);
+    // cppurses::set_background(*this, cppurses::Color::Blue);
+    // cppurses::set_foreground(*this, cppurses::Color::Black);
 }
 
 void Submatch_display::add_match(const Match& m) {

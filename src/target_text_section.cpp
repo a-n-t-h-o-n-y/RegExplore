@@ -12,6 +12,9 @@ Target_text_section::Target_text_section() {
                              std::istreambuf_iterator<char>()};
         tb_highlight.set_text(contents);
     });
+
+    // change colors
+    // open_file....
 }
 
 }  // namespace regex_explore

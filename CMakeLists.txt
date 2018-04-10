@@ -15,6 +15,8 @@ add_library(regex_explore STATIC
     src/options_page.cpp
     src/reference_page.cpp
     src/options_and_reference.cpp
+    src/match_page.cpp
+    src/options_box.cpp
 )
 
 target_compile_options(regex_explore PUBLIC -Wall)

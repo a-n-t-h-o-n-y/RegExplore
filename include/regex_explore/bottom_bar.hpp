@@ -2,6 +2,7 @@
 #define REGEX_EXPLORE_BOTTOM_BAR_HPP
 #include <cppurses/widget/layouts/horizontal_layout.hpp>
 
+#include <regex_explore/match_page.hpp>
 #include <regex_explore/options_and_reference.hpp>
 #include <regex_explore/submatch_display.hpp>
 
@@ -9,9 +10,10 @@ namespace regex_explore {
 class Textbox_highlight;
 
 struct Bottom_bar : cppurses::Horizontal_layout {
-    Bottom_bar(const Textbox_highlight*);
+    Bottom_bar(const Textbox_highlight* highlight_box);
 
-    Submatch_display& submatch_display;
+    // Submatch_display& submatch_display;
+    Match_page& match_page;
     Options_and_reference& options_and_reference{
         this->make_child<Options_and_reference>()};
 };

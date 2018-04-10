@@ -25,7 +25,8 @@ Regex_explore_widget::Regex_explore_widget() {
     // Submatch selection
     target_text_section_.tb_highlight.clicked_at_index.connect(
         [this](std::size_t text_index) {
-            bottom_bar_.submatch_display.set_match_from_text_index(text_index);
+            bottom_bar_.match_page.submatch_display.set_match_from_text_index(
+                text_index);
         });
 
     target_text_section_.height_policy.stretch(3);
@@ -125,7 +126,7 @@ void Regex_explore_widget::perform_search_and_update() {
 
     // Clear the current tb_highlight of ranges.
     target_text_section_.tb_highlight.clear_all_highlights();
-    bottom_bar_.submatch_display.clear_all_matches();
+    bottom_bar_.match_page.submatch_display.clear_all_matches();
 
     // Search target text with above regex in a loop
     for (std::sregex_iterator i{std::sregex_iterator(
@@ -144,7 +145,7 @@ void Regex_explore_widget::perform_search_and_update() {
                             static_cast<std::size_t>(match.length(i))};
             match_data.submatches.push_back(sub_range);
         }
-        bottom_bar_.submatch_display.add_match(match_data);
+        bottom_bar_.match_page.submatch_display.add_match(match_data);
     }
 }
 

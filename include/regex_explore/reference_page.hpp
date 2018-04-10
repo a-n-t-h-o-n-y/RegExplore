@@ -13,7 +13,7 @@ struct Reference_page : cppurses::Vertical_layout {
 
     cppurses::Textbox& reference_box{this->make_child<cppurses::Textbox>()};
     cppurses::Push_button& change_page{
-        this->make_child<cppurses::Push_button>("Options")};
+        this->make_child<cppurses::Push_button>("> Options <")};
 };
 
 }  // namespace regex_explore
