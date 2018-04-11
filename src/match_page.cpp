@@ -9,16 +9,14 @@
 
 namespace regex_explore {
 
-Match_page::Match_page(const Textbox_highlight* highlight_box)
-    : match_box{this->make_child<Match_box>(highlight_box)} {
-    cppurses::disable_corners(this->border);
-    cppurses::disable_walls(this->border);
+Match_page::Match_page() {
+    disable_corners(this->border);
+    disable_walls(this->border);
     this->border.east_enabled = true;
-    cppurses::enable_border(*this);
+    enable_border(*this);
 
-    cppurses::set_background(label, cppurses::Color::Light_gray);
-    cppurses::set_foreground(label, cppurses::Color::Black);
-
+    set_background(label, cppurses::Color::Light_gray);
+    set_foreground(label, cppurses::Color::Black);
     label.set_alignment(cppurses::Alignment::Center);
 }
 

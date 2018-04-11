@@ -13,21 +13,24 @@ class Regex_explore_widget : public cppurses::Vertical_layout {
    public:
     Regex_explore_widget();
 
-   private:
-    Top_bar& top_bar_{this->make_child<Top_bar>()};
-
-    Target_text_section& target_text_section_{
+    Top_bar& top_bar{this->make_child<Top_bar>()};
+    Target_text_section& target_text_section{
         this->make_child<Target_text_section>()};
+    Bottom_bar& bottom_bar{this->make_child<Bottom_bar>()};
 
-    Bottom_bar& bottom_bar_{this->make_child<Bottom_bar>(
-        &target_text_section_.highlight_and_scroll.tb_highlight)};
-
+   private:
     Regex_store regex_store_;
 
     void clear_displays();
     void update_displays();
 
-    // void perform_search_and_update();
+    // Connected to Signals
+    void set_target_text(const std::string& text);
+    void set_regex_text(const std::string& regex);
+    void set_regex_type(const std::string& option);
+    void add_option(Option_flag option);
+    void remove_option(Option_flag option);
+    void set_matchbox_text(std::size_t text_index);
 };
 
 }  // namespace regex_explore

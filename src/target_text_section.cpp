@@ -1,10 +1,10 @@
+#include <regex_explore/target_text_section.hpp>
+
 #include <fstream>
 #include <streambuf>
 #include <string>
 
 #include <cppurses/painter/color.hpp>
-
-#include <regex_explore/target_text_section.hpp>
 
 namespace regex_explore {
 
@@ -15,8 +15,8 @@ Target_text_section::Target_text_section() {
         highlight_and_scroll.tb_highlight.set_text(contents);
     });
 
-    cppurses::set_background(open_file.filename_edit, cppurses::Color::Black);
-    cppurses::set_foreground(open_file.filename_edit, cppurses::Color::White);
+    set_background(open_file.filename_edit, cppurses::Color::Black);
+    set_foreground(open_file.filename_edit, cppurses::Color::White);
     open_file.filename_edit.set_ghost_color(cppurses::Color::Light_gray);
 }
 

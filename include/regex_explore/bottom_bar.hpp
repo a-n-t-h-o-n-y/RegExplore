@@ -7,12 +7,9 @@
 #include <regex_explore/options_and_reference.hpp>
 
 namespace regex_explore {
-class Textbox_highlight;
 
 struct Bottom_bar : cppurses::Horizontal_layout {
-    Bottom_bar(const Textbox_highlight* highlight_box);
-
-    Match_page& match_page;
+    Match_page& match_page{this->make_child<Match_page>()};
     Options_and_reference& options_and_reference{
         this->make_child<Options_and_reference>()};
 };

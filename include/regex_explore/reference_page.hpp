@@ -5,8 +5,6 @@
 #include <cppurses/widget/widgets/push_button.hpp>
 #include <cppurses/widget/widgets/textbox.hpp>
 
-#include <regex_explore/options_box.hpp>
-
 namespace regex_explore {
 
 struct Reference_page : cppurses::Vertical_layout {

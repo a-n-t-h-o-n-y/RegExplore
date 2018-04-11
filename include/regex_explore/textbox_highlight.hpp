@@ -1,9 +1,12 @@
 #ifndef REGEX_EXPLORER_TEXTBOX_HIGHLIGHT_HPP
 #define REGEX_EXPLORER_TEXTBOX_HIGHLIGHT_HPP
+#include <cstddef>
 #include <cstdint>
 
 #include <cppurses/painter/color.hpp>
+#include <cppurses/system/mouse_button.hpp>
 #include <cppurses/widget/layouts/horizontal_layout.hpp>
+#include <cppurses/widget/point.hpp>
 #include <cppurses/widget/widgets/textbox.hpp>
 #include <cppurses/widget/widgets/vertical_scrollbar.hpp>
 #include <signals/signals.hpp>
@@ -16,7 +19,7 @@ class Textbox_highlight : public cppurses::Textbox {
    public:
     Textbox_highlight();
 
-    void set_highlight(cppurses::Color color);
+    void set_highlight_color(cppurses::Color color);
 
     void add_highlight(const Range& range);
     void remove_highlight(const Range& range);

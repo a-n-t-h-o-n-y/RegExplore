@@ -1,5 +1,7 @@
 #include <regex_explore/reference_page.hpp>
 
+#include <string>
+
 #include <cppurses/painter/color.hpp>
 #include <cppurses/widget/size_policy.hpp>
 
@@ -56,16 +58,16 @@ namespace regex_explore {
 
 Reference_page::Reference_page() {
     label.set_alignment(cppurses::Alignment::Center);
-    cppurses::set_background(label, cppurses::Color::Light_gray);
-    cppurses::set_foreground(label, cppurses::Color::Black);
+    set_background(label, cppurses::Color::Light_gray);
+    set_foreground(label, cppurses::Color::Black);
 
     reference_text.disable_input();
     reference_text.set_text(regex_reference);
 
     change_page.height_policy.type(cppurses::Size_policy::Fixed);
     change_page.height_policy.hint(1);
-    cppurses::set_background(change_page, cppurses::Color::Blue);
-    cppurses::set_foreground(change_page, cppurses::Color::White);
+    set_background(change_page, cppurses::Color::Blue);
+    set_foreground(change_page, cppurses::Color::White);
 }
 
 }  // namespace regex_explore

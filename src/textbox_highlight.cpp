@@ -1,6 +1,7 @@
 #include <regex_explore/textbox_highlight.hpp>
 
 #include <cstddef>
+#include <cstdint>
 
 #include <cppurses/painter/attribute.hpp>
 #include <cppurses/painter/brush.hpp>
@@ -11,11 +12,11 @@
 namespace regex_explore {
 
 Textbox_highlight::Textbox_highlight() : Textbox("Target Text") {
-    cppurses::set_background(*this, cppurses::Color::White);
-    cppurses::set_foreground(*this, cppurses::Color::Black);
+    set_background(*this, cppurses::Color::White);
+    set_foreground(*this, cppurses::Color::Black);
 }
 
-void Textbox_highlight::set_highlight(cppurses::Color color) {
+void Textbox_highlight::set_highlight_color(cppurses::Color color) {
     highlight_color_ = color;
     this->update();
 }

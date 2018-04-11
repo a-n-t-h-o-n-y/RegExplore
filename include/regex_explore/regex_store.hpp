@@ -13,9 +13,6 @@ namespace regex_explore {
 /// Performs a regular expression search and provides results.
 class Regex_store {
    public:
-    Regex_store(const std::string& target_text = "",
-                const std::string& regex_text = "");
-
     // State Change
     void set_text(std::string target_text);
     void set_regex(std::string regex_text);

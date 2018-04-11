@@ -8,15 +8,14 @@
 #include <regex_explore/match_box.hpp>
 
 namespace regex_explore {
-class Textbox_highlight;
 
 struct Match_page : cppurses::Vertical_layout {
-    Match_page(const Textbox_highlight* highlight_box);
+    Match_page();
 
     void set_match_count(std::size_t count);
 
     cppurses::Label& label{this->make_child<cppurses::Label>("Matches(0)")};
-    Match_box& match_box;
+    Match_box& match_box{this->make_child<Match_box>()};
 };
 
 }  // namespace regex_explore

@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 
+#include <regex_explore/match.hpp>
 #include <regex_explore/option_flag.hpp>
 #include <regex_explore/range.hpp>
 #include <regex_explore/type_flag.hpp>
@@ -78,10 +79,6 @@ std::regex::flag_type type_to_mask(Type_flag type) {
 }  // namespace
 
 namespace regex_explore {
-
-Regex_store::Regex_store(const std::string& target_text,
-                         const std::string& regex_text)
-    : target_text_{target_text}, regex_text_{regex_text} {}
 
 // STATE CHANGES - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void Regex_store::set_text(std::string target_text) {

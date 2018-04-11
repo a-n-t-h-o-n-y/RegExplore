@@ -2,6 +2,7 @@
 #define REGEX_EXPLORE_OPTIONS_PAGE_HPP
 #include <cppurses/painter/glyph_string.hpp>
 #include <cppurses/widget/layouts/vertical_layout.hpp>
+#include <cppurses/widget/widget.hpp>
 #include <cppurses/widget/widgets/push_button.hpp>
 
 #include <regex_explore/options_box.hpp>

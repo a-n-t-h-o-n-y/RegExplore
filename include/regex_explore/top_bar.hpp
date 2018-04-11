@@ -9,9 +9,10 @@ namespace regex_explore {
 
 struct Regex_enter : cppurses::Horizontal_layout {
     Regex_enter();
+
     cppurses::Label& label{this->make_child<cppurses::Label>("Regex:")};
     cppurses::Line_edit& regex_edit{
-        this->make_child<cppurses::Line_edit>(R"(([^\s]+))")};
+        this->make_child<cppurses::Line_edit>(R"(r(eg)e[x])")};
 };
 
 struct Top_bar : cppurses::Horizontal_layout {
