@@ -48,6 +48,20 @@ void Match_box::set_match_from_text_index(std::size_t text_index) {
     }
 }
 
+void Match_box::display_match(const std::vector<std::string> match_strings) {
+    std::stringstream ss;
+    for (std::size_t i{0}; i < match_strings.size(); ++i) {
+        if (i == 0) {
+            ss << "Entire Match: " << match_strings[i] << std::endl;
+        } else {
+            ss << "Group " << i - 1 << ": " << match_strings[i] << std::endl;
+        }
+    }
+    std::string result{ss.str()};
+    result.pop_back();
+    this->set_text(result);
+}
+
 std::string Match_box::build_text(std::size_t index) {
     std::stringstream ss;
     // Entire Match

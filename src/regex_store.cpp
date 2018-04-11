@@ -7,6 +7,7 @@
 #include <vector>
 
 #include <regex_explore/option_flag.hpp>
+#include <regex_explore/range.hpp>
 #include <regex_explore/type_flag.hpp>
 
 // LOCAL UTILITY - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -78,6 +79,10 @@ std::regex::flag_type type_to_mask(Type_flag type) {
 
 namespace regex_explore {
 
+Regex_store::Regex_store(const std::string& target_text,
+                         const std::string& regex_text)
+    : target_text_{target_text}, regex_text_{regex_text} {}
+
 // STATE CHANGES - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void Regex_store::set_text(std::string target_text) {
     target_text_ = target_text;
@@ -115,6 +120,17 @@ Match Regex_store::get_match(std::size_t match_index) const {
     return matches_.at(match_index);
 }
 
+std::vector<std::string> Regex_store::get_match_strings(
+    std::size_t text_index) const {
+    for (std::size_t i{0}; i < this->match_count(); ++i) {
+        if (text_index >= matches_[i].entire.index &&
+            text_index < matches_[i].entire.index + matches_[i].entire.length) {
+            return this->get_strings(i);
+        }
+    }
+    return std::vector<std::string>();
+}
+
 std::size_t Regex_store::match_count() const {
     return matches_.size();
 }
@@ -137,7 +153,7 @@ void Regex_store::update_results() {
     auto begin = std::begin(target_text_);
     auto end = std::end(target_text_);
     using RegIter = std::sregex_iterator;
-    for (RegIter iter{begin, end, regex}; iter != RegIter{}; ++iter) {
+    for (RegIter iter(begin, end, regex); iter != RegIter(); ++iter) {
         std::smatch regex_match{*iter};
         // Entire Match
         Range entire{static_cast<std::size_t>(regex_match.position(0)),
@@ -152,6 +168,22 @@ void Regex_store::update_results() {
         }
         matches_.push_back(match_data);
     }
+}
+
+std::vector<std::string> Regex_store::get_strings(
+    std::size_t match_index) const {
+    std::vector<std::string> results;
+    const Match& match{matches_[match_index]};
+
+    // Entire Match
+    results.push_back(
+        target_text_.substr(match.entire.index, match.entire.length));
+
+    // SubMatches
+    for (Range submatch : match.submatches) {
+        results.push_back(target_text_.substr(submatch.index, submatch.length));
+    }
+    return results;
 }
 
 }  // namespace regex_explore

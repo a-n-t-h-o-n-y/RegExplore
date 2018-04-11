@@ -31,9 +31,6 @@ class Textbox_highlight : public cppurses::Textbox {
 
    private:
     cppurses::Color highlight_color_{cppurses::Color::Yellow};
-
-    void add_highlights();  // these two are used by paint_event()
-    void remove_highlights();
 };
 
 struct Highlight_and_scroll : cppurses::Horizontal_layout {

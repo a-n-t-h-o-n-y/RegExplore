@@ -1,5 +1,6 @@
 #include <regex_explore/match_page.hpp>
 
+#include <cstddef>
 #include <sstream>
 
 #include <cppurses/widget/border.hpp>
@@ -21,9 +22,9 @@ Match_page::Match_page(const Textbox_highlight* highlight_box)
     label.set_alignment(cppurses::Alignment::Center);
 }
 
-void Match_page::set_match_count() {
+void Match_page::set_match_count(std::size_t count) {
     std::stringstream ss;
-    ss << "Matches(" << match_box.matches_count() << ")";
+    ss << "Matches(" << count << ")";
     label.set_text(ss.str());
 }
 

@@ -13,6 +13,9 @@ namespace regex_explore {
 /// Performs a regular expression search and provides results.
 class Regex_store {
    public:
+    Regex_store(const std::string& target_text = "",
+                const std::string& regex_text = "");
+
     // State Change
     void set_text(std::string target_text);
     void set_regex(std::string regex_text);
@@ -22,6 +25,10 @@ class Regex_store {
 
     // Results
     Match get_match(std::size_t match_index) const;
+
+    /// First entry is entire match, submatches follow.
+    std::vector<std::string> get_match_strings(std::size_t text_index) const;
+
     std::size_t match_count() const;
 
    private:
@@ -36,6 +43,7 @@ class Regex_store {
 
     // Performs Regex Search
     void update_results();
+    std::vector<std::string> get_strings(std::size_t match_index) const;
 };
 
 }  // namespace regex_explore

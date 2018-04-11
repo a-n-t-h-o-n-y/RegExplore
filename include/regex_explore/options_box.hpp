@@ -4,6 +4,8 @@
 #include <cppurses/widget/widgets/checkbox.hpp>
 #include <cppurses/widget/widgets/label.hpp>
 
+#include <regex_explore/option_flag.hpp>
+
 namespace regex_explore {
 
 struct Options_box : cppurses::Vertical_layout {
@@ -18,6 +20,9 @@ struct Options_box : cppurses::Vertical_layout {
         this->make_child<cppurses::Checkbox>("Optimize")};
     cppurses::Checkbox& collate{
         this->make_child<cppurses::Checkbox>("Collate(locale)")};
+
+    sig::Signal<void(Option_flag)> option_enabled;
+    sig::Signal<void(Option_flag)> option_disabled;
 };
 
 }  // namespace regex_explore

@@ -1,10 +1,9 @@
 #ifndef REGEX_EXPLORE_REGEX_EXPLORE_WIDGET_HPP
 #define REGEX_EXPLORE_REGEX_EXPLORE_WIDGET_HPP
-#include <regex>
-
 #include <cppurses/widget/layouts/vertical_layout.hpp>
 
 #include <regex_explore/bottom_bar.hpp>
+#include <regex_explore/regex_store.hpp>
 #include <regex_explore/target_text_section.hpp>
 #include <regex_explore/top_bar.hpp>
 
@@ -23,14 +22,12 @@ class Regex_explore_widget : public cppurses::Vertical_layout {
     Bottom_bar& bottom_bar_{this->make_child<Bottom_bar>(
         &target_text_section_.highlight_and_scroll.tb_highlight)};
 
-    void perform_search_and_update();
+    Regex_store regex_store_;
 
-    void unset_option(std::regex::flag_type option);
-    void set_option(std::regex::flag_type option);
+    void clear_displays();
+    void update_displays();
 
-    // Regex Parameters
-    std::regex::flag_type regex_type_{std::regex::ECMAScript};
-    std::regex::flag_type regex_options_{static_cast<std::regex::flag_type>(0)};
+    // void perform_search_and_update();
 };
 
 }  // namespace regex_explore

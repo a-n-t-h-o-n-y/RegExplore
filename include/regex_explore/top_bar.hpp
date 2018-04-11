@@ -16,6 +16,7 @@ struct Regex_enter : cppurses::Horizontal_layout {
 
 struct Top_bar : cppurses::Horizontal_layout {
     Top_bar();
+
     Regex_enter& regex_enter{this->make_child<Regex_enter>()};
     cppurses::Labeled_cycle_box& regex_type_select{
         this->make_child<cppurses::Labeled_cycle_box>("Type")};

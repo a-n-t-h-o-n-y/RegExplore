@@ -19,6 +19,8 @@ class Match_box : public cppurses::Textbox {
     void clear_all_matches();
     std::size_t matches_count() const;
 
+    void display_match(const std::vector<std::string> match_strings);
+
     void set_current_match(std::size_t index);
     void set_match_from_text_index(std::size_t text_index);
 

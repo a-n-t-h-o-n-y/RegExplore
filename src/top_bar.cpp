@@ -19,6 +19,13 @@ Top_bar::Top_bar() {
     regex_type_select.width_policy.type(cppurses::Size_policy::Maximum);
     regex_type_select.width_policy.hint(18);
     regex_type_select.set_divider(L'▸');
+
+    regex_type_select.cycle_box.add_option("ECMAScript");
+    regex_type_select.cycle_box.add_option("basic");
+    regex_type_select.cycle_box.add_option("extended");
+    regex_type_select.cycle_box.add_option("awk");
+    regex_type_select.cycle_box.add_option("grep");
+    regex_type_select.cycle_box.add_option("egrep");
 }
 
 }  // namespace regex_explore
