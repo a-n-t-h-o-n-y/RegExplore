@@ -110,7 +110,8 @@ void Regex_explore_widget::perform_search_and_update() {
             .clear_all_highlights();
         bottom_bar_.match_page.match_box.clear_all_matches();
         top_bar_.regex_enter.regex_edit.brush.remove_background();
-        bottom_bar_.match_page.set_match_count(0);
+        bottom_bar_.match_page.match_box.clear_all_matches();
+        bottom_bar_.match_page.set_match_count();
         return;
     }
 
@@ -159,7 +160,7 @@ void Regex_explore_widget::perform_search_and_update() {
         }
         bottom_bar_.match_page.match_box.add_match(match_data);
     }
-    bottom_bar_.match_page.set_match_count(match_count);
+    bottom_bar_.match_page.set_match_count();
 }
 
 void Regex_explore_widget::unset_option(std::regex::flag_type option) {

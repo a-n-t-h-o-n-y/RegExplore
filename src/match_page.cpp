@@ -21,9 +21,9 @@ Match_page::Match_page(const Textbox_highlight* highlight_box)
     label.set_alignment(cppurses::Alignment::Center);
 }
 
-void Match_page::set_match_count(std::size_t count) {
+void Match_page::set_match_count() {
     std::stringstream ss;
-    ss << "Matches(" << count << ")";
+    ss << "Matches(" << match_box.matches_count() << ")";
     label.set_text(ss.str());
 }
 

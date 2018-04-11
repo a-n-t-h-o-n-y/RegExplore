@@ -4,6 +4,7 @@
 
 #include <cstddef>
 #include <string>
+#include <vector>
 
 #include <regex_explore/match.hpp>
 
@@ -16,9 +17,10 @@ class Match_box : public cppurses::Textbox {
     Match_box(const Textbox_highlight* highlight_box);
     void add_match(const Match& m);
     void clear_all_matches();
+    std::size_t matches_count() const;
+
     void set_current_match(std::size_t index);
     void set_match_from_text_index(std::size_t text_index);
-    std::size_t size() const;
 
    private:
     std::vector<Match> matches_;
@@ -26,6 +28,7 @@ class Match_box : public cppurses::Textbox {
 
     std::string build_text(std::size_t index);
     std::string retrieve_text(const Range& range);
+    void clear_screen();
 };
 
 }  // namespace regex_explore

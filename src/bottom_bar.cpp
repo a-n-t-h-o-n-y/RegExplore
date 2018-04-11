@@ -1,8 +1,7 @@
 #include <regex_explore/bottom_bar.hpp>
 
 #include <regex_explore/match_page.hpp>
-#include <regex_explore/options_page.hpp>
-#include <regex_explore/reference_page.hpp>
+#include <regex_explore/textbox_highlight.hpp>
 
 namespace regex_explore {
 
