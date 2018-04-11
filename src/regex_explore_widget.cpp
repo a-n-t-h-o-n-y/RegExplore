@@ -70,7 +70,12 @@ void Regex_explore_widget::update_displays() {
 
 void Regex_explore_widget::set_target_text(const std::string& text) {
     this->clear_displays();
-    regex_store_.set_text(text);
+    try {
+        regex_store_.set_text(text);
+    } catch (const std::regex_error&) {
+        set_background(top_bar.regex_enter.regex_edit, cppurses::Color::Red);
+        return;
+    }
     this->update_displays();
 }
 
@@ -87,31 +92,46 @@ void Regex_explore_widget::set_regex_text(const std::string& regex) {
 
 void Regex_explore_widget::set_regex_type(const std::string& option) {
     this->clear_displays();
-    if (option == "ECMAScript") {
-        regex_store_.set_type(Type_flag::ECMAScript);
-    } else if (option == "basic") {
-        regex_store_.set_type(Type_flag::basic);
-    } else if (option == "extended") {
-        regex_store_.set_type(Type_flag::extended);
-    } else if (option == "awk") {
-        regex_store_.set_type(Type_flag::awk);
-    } else if (option == "grep") {
-        regex_store_.set_type(Type_flag::grep);
-    } else if (option == "egrep") {
-        regex_store_.set_type(Type_flag::egrep);
+    try {
+        if (option == "ECMAScript") {
+            regex_store_.set_type(Type_flag::ECMAScript);
+        } else if (option == "basic") {
+            regex_store_.set_type(Type_flag::basic);
+        } else if (option == "extended") {
+            regex_store_.set_type(Type_flag::extended);
+        } else if (option == "awk") {
+            regex_store_.set_type(Type_flag::awk);
+        } else if (option == "grep") {
+            regex_store_.set_type(Type_flag::grep);
+        } else if (option == "egrep") {
+            regex_store_.set_type(Type_flag::egrep);
+        }
+    } catch (const std::regex_error&) {
+        set_background(top_bar.regex_enter.regex_edit, cppurses::Color::Red);
+        return;
     }
     this->update_displays();
 }
 
 void Regex_explore_widget::add_option(Option_flag option) {
     this->clear_displays();
-    regex_store_.set_option(option);
+    try {
+        regex_store_.set_option(option);
+    } catch (const std::regex_error&) {
+        set_background(top_bar.regex_enter.regex_edit, cppurses::Color::Red);
+        return;
+    }
     this->update_displays();
 }
 
 void Regex_explore_widget::remove_option(Option_flag option) {
     this->clear_displays();
-    regex_store_.unset_option(option);
+    try {
+        regex_store_.unset_option(option);
+    } catch (const std::regex_error&) {
+        set_background(top_bar.regex_enter.regex_edit, cppurses::Color::Red);
+        return;
+    }
     this->update_displays();
 }
 
