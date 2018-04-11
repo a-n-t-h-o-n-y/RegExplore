@@ -25,7 +25,7 @@ Regex_explore_widget::Regex_explore_widget() {
     // Submatch selection
     target_text_section_.highlight_and_scroll.tb_highlight.clicked_at_index
         .connect([this](std::size_t text_index) {
-            bottom_bar_.match_page.submatch_display.set_match_from_text_index(
+            bottom_bar_.match_page.match_box.set_match_from_text_index(
                 text_index);
         });
 
@@ -108,7 +108,7 @@ void Regex_explore_widget::perform_search_and_update() {
     if (regex_str.empty()) {
         target_text_section_.highlight_and_scroll.tb_highlight
             .clear_all_highlights();
-        bottom_bar_.match_page.submatch_display.clear_all_matches();
+        bottom_bar_.match_page.match_box.clear_all_matches();
         top_bar_.regex_enter.regex_edit.brush.remove_background();
         bottom_bar_.match_page.set_match_count(0);
         return;
@@ -135,7 +135,7 @@ void Regex_explore_widget::perform_search_and_update() {
     // Clear the current tb_highlight of ranges.
     target_text_section_.highlight_and_scroll.tb_highlight
         .clear_all_highlights();
-    bottom_bar_.match_page.submatch_display.clear_all_matches();
+    bottom_bar_.match_page.match_box.clear_all_matches();
 
     // Search target text with above regex in a loop
     std::size_t match_count{0};
@@ -157,7 +157,7 @@ void Regex_explore_widget::perform_search_and_update() {
                             static_cast<std::size_t>(match.length(i))};
             match_data.submatches.push_back(sub_range);
         }
-        bottom_bar_.match_page.submatch_display.add_match(match_data);
+        bottom_bar_.match_page.match_box.add_match(match_data);
     }
     bottom_bar_.match_page.set_match_count(match_count);
 }

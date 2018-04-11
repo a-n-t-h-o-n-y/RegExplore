@@ -4,10 +4,12 @@
 
 #include <cppurses/widget/border.hpp>
 
+#include <regex_explore/match_box.hpp>
+
 namespace regex_explore {
 
 Match_page::Match_page(const Textbox_highlight* highlight_box)
-    : submatch_display{this->make_child<Submatch_display>(highlight_box)} {
+    : match_box{this->make_child<Match_box>(highlight_box)} {
     cppurses::disable_corners(this->border);
     cppurses::disable_walls(this->border);
     this->border.east_enabled = true;

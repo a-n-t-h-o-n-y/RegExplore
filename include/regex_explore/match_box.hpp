@@ -1,5 +1,5 @@
-#ifndef REGEX_EXPLORE_SUBMATCH_DISPLAY_HPP
-#define REGEX_EXPLORE_SUBMATCH_DISPLAY_HPP
+#ifndef REGEX_EXPLORE_MATCH_BOX_HPP
+#define REGEX_EXPLORE_MATCH_BOX_HPP
 #include <cppurses/widget/widgets/textbox.hpp>
 
 #include <cstddef>
@@ -11,9 +11,9 @@ namespace regex_explore {
 struct Range;
 class Textbox_highlight;
 
-class Submatch_display : public cppurses::Textbox {
+class Match_box : public cppurses::Textbox {
    public:
-    Submatch_display(const Textbox_highlight* highlight_box);
+    Match_box(const Textbox_highlight* highlight_box);
     void add_match(const Match& m);
     void clear_all_matches();
     void set_current_match(std::size_t index);
@@ -29,4 +29,4 @@ class Submatch_display : public cppurses::Textbox {
 };
 
 }  // namespace regex_explore
-#endif  // REGEX_EXPLORE_SUBMATCH_DISPLAY_HPP
+#endif  // REGEX_EXPLORE_MATCH_BOX_HPP

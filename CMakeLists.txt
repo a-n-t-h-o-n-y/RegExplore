@@ -11,7 +11,7 @@ add_library(regex_explore STATIC
     src/bottom_bar.cpp
     src/textbox_highlight.cpp
     src/regex_explore_widget.cpp
-    src/submatch_display.cpp
+    src/match_box.cpp
     src/options_page.cpp
     src/reference_page.cpp
     src/options_and_reference.cpp

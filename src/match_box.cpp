@@ -1,4 +1,4 @@
-#include <regex_explore/submatch_display.hpp>
+#include <regex_explore/match_box.hpp>
 
 #include <cstddef>
 #include <sstream>
@@ -12,28 +12,29 @@
 
 namespace regex_explore {
 
-Submatch_display::Submatch_display(const Textbox_highlight* highlight_box)
+Match_box::Match_box(const Textbox_highlight* highlight_box)
     : text_widg_{highlight_box} {
     this->cppurses::Textbox::disable_input();
 }
 
-void Submatch_display::add_match(const Match& m) {
+void Match_box::add_match(const Match& m) {
     matches_.push_back(m);
 }
 
-void Submatch_display::clear_all_matches() {
+void Match_box::clear_all_matches() {
     matches_.clear();
+
     this->cppurses::Text_display::clear();
 }
 
-void Submatch_display::set_current_match(std::size_t index) {
-    if (index >= this->Submatch_display::size()) {
+void Match_box::set_current_match(std::size_t index) {
+    if (index >= this->Match_box::size()) {
         return;
     }
     this->set_text(this->build_text(index));
 }
 
-void Submatch_display::set_match_from_text_index(std::size_t text_index) {
+void Match_box::set_match_from_text_index(std::size_t text_index) {
     for (std::size_t i{0}; i < matches_.size(); ++i) {
         if (text_index >= matches_[i].entire.index &&
             text_index < matches_[i].entire.index + matches_[i].entire.length) {
@@ -42,11 +43,11 @@ void Submatch_display::set_match_from_text_index(std::size_t text_index) {
     }
 }
 
-std::size_t Submatch_display::size() const {
+std::size_t Match_box::size() const {
     return matches_.size();
 }
 
-std::string Submatch_display::retrieve_text(const Range& range) {
+std::string Match_box::retrieve_text(const Range& range) {
     std::string result;
     for (std::size_t i{0}; i < range.length; ++i) {
         cppurses::Glyph glyph{text_widg_->glyph_at(range.index + i)};
@@ -56,7 +57,7 @@ std::string Submatch_display::retrieve_text(const Range& range) {
     return result;
 }
 
-std::string Submatch_display::build_text(std::size_t index) {
+std::string Match_box::build_text(std::size_t index) {
     std::stringstream ss;
     // Entire Match
     ss << "Entire Match: ";

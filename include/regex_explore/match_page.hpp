@@ -3,7 +3,7 @@
 #include <cppurses/widget/layouts/vertical_layout.hpp>
 #include <cppurses/widget/widgets/label.hpp>
 
-#include <regex_explore/submatch_display.hpp>
+#include <regex_explore/match_box.hpp>
 
 namespace regex_explore {
 class Textbox_highlight;
@@ -13,7 +13,7 @@ struct Match_page : cppurses::Vertical_layout {
     void set_match_count(std::size_t count);
 
     cppurses::Label& label{this->make_child<cppurses::Label>("Matches(0)")};
-    Submatch_display& submatch_display;
+    Match_box& match_box;
 };
 
 }  // namespace regex_explore
