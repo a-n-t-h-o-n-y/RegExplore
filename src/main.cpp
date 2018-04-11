@@ -1,15 +1,21 @@
 #include <cppurses/cppurses.hpp>
 
 #include <regex_explore/regex_explore_widget.hpp>
-#include <regex_explore/textbox_highlight.hpp>
-#include <regex_explore/top_bar.hpp>
+
+struct RegExplore : cppurses::Vertical_layout {
+    using Titlebar = cppurses::Titlebar;
+    using RegWidg = regex_explore::Regex_explore_widget;
+
+    Titlebar& title{this->make_child<Titlebar>("RegExplore")};
+    RegWidg& regexplore{this->make_child<RegWidg>()};
+};
 
 int main(int argc, const char* argv[]) {
     cppurses::System sys;
 
-    regex_explore::Regex_explore_widget widg;
+    RegExplore re;
 
-    sys.set_head(&widg);
+    sys.set_head(&re);
 
     return sys.run();
 }
