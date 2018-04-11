@@ -25,9 +25,16 @@ target_link_libraries(regex_explore PUBLIC ncurses
     /usr/local/lib64/liblibcppurses.a)
 target_include_directories(regex_explore PUBLIC include/)
 
-# DEMO
-add_executable(main src/main.cpp)
-target_compile_options(main PUBLIC -Wall)
-target_compile_features(main PUBLIC cxx_std_14)
-target_include_directories(main PUBLIC include/)
-target_link_libraries(main PUBLIC regex_explore)
+# RegExplore App
+add_executable(regexplore src/main.cpp)
+target_compile_options(regexplore PUBLIC -Wall)
+target_compile_features(regexplore PUBLIC cxx_std_14)
+target_include_directories(regexplore PUBLIC include/)
+target_link_libraries(regexplore PUBLIC regex_explore)
+
+include(GNUInstallDirs)
+install(TARGETS regexplore
+        ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
