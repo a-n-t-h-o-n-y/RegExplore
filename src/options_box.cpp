@@ -1,8 +1,9 @@
-#include <regex_explore/options_box.hpp>
+#include "options_box.hpp"
 
 #include <cppurses/painter/color.hpp>
+#include <cppurses/widget/widget_free_functions.hpp>
 
-#include <regex_explore/option_flag.hpp>
+#include "option_flag.hpp"
 
 namespace regex_explore {
 

@@ -5,7 +5,7 @@
 #include <cppurses/widget/widgets/label.hpp>
 #include <signals/signal.hpp>
 
-#include <regex_explore/option_flag.hpp>
+#include "option_flag.hpp"
 
 namespace regex_explore {
 

@@ -1,4 +1,4 @@
-#include <regex_explore/options_and_reference.hpp>
+#include "options_and_reference.hpp"
 
 namespace regex_explore {
 

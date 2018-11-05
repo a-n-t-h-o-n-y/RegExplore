@@ -1,17 +1,17 @@
-#ifndef REGEXPLORE_REGEX_STORE_HPP
-#define REGEXPLORE_REGEX_STORE_HPP
+#ifndef REGEXPLORE_REGEX_ENGINE_HPP
+#define REGEXPLORE_REGEX_ENGINE_HPP
 #include <cstddef>
 #include <string>
 #include <vector>
 
-#include <regex_explore/match.hpp>
-#include <regex_explore/option_flag.hpp>
-#include <regex_explore/type_flag.hpp>
+#include "match.hpp"
+#include "option_flag.hpp"
+#include "type_flag.hpp"
 
 namespace regex_explore {
 
 /// Performs a regular expression search and provides results.
-class Regex_store {
+class Regex_engine {
    public:
     // State Change
     void set_text(std::string target_text);
@@ -44,4 +44,4 @@ class Regex_store {
 };
 
 }  // namespace regex_explore
-#endif  // REGEXPLORE_REGEX_STORE_HPP
+#endif  // REGEXPLORE_REGEX_ENGINE_HPP

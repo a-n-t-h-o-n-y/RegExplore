@@ -1,6 +1,6 @@
 #include <cppurses/cppurses.hpp>
 
-#include <regex_explore/regex_explore_widget.hpp>
+#include "regex_explore_widget.hpp"
 
 struct RegExplore : cppurses::Vertical_layout {
     using Titlebar = cppurses::Titlebar;

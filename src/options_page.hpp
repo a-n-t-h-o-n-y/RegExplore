@@ -5,7 +5,7 @@
 #include <cppurses/widget/widget.hpp>
 #include <cppurses/widget/widgets/push_button.hpp>
 
-#include <regex_explore/options_box.hpp>
+#include "options_box.hpp"
 
 namespace regex_explore {
 

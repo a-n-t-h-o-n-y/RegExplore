@@ -3,7 +3,7 @@
 #include <cppurses/widget/layouts/vertical_layout.hpp>
 #include <cppurses/widget/widgets/open_file.hpp>
 
-#include <regex_explore/textbox_highlight.hpp>
+#include "textbox_highlight.hpp"
 
 namespace regex_explore {
 

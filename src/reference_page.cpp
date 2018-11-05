@@ -1,9 +1,10 @@
-#include <regex_explore/reference_page.hpp>
+#include "reference_page.hpp"
 
 #include <string>
 
 #include <cppurses/painter/color.hpp>
 #include <cppurses/widget/size_policy.hpp>
+#include <cppurses/widget/widget_free_functions.hpp>
 
 namespace {
 

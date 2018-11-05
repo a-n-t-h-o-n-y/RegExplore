@@ -1,11 +1,12 @@
-#include <regex_explore/match_page.hpp>
+#include "match_page.hpp"
 
 #include <cstddef>
 #include <sstream>
 
 #include <cppurses/widget/border.hpp>
+#include <cppurses/widget/widget_free_functions.hpp>
 
-#include <regex_explore/match_box.hpp>
+#include "match_box.hpp"
 
 namespace regex_explore {
 

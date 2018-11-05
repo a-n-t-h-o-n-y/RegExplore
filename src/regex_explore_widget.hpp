@@ -2,10 +2,10 @@
 #define REGEX_EXPLORE_REGEX_EXPLORE_WIDGET_HPP
 #include <cppurses/widget/layouts/vertical_layout.hpp>
 
-#include <regex_explore/bottom_bar.hpp>
-#include <regex_explore/regex_store.hpp>
-#include <regex_explore/target_text_section.hpp>
-#include <regex_explore/top_bar.hpp>
+#include "bottom_bar.hpp"
+#include "regex_engine.hpp"
+#include "target_text_section.hpp"
+#include "top_bar.hpp"
 
 namespace regex_explore {
 
@@ -19,7 +19,7 @@ class Regex_explore_widget : public cppurses::Vertical_layout {
     Bottom_bar& bottom_bar{this->make_child<Bottom_bar>()};
 
    private:
-    Regex_store regex_store_;
+    Regex_engine regex_engine_;
 
     void clear_displays();
     void update_displays();

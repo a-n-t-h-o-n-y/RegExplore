@@ -1,7 +1,8 @@
-#include <regex_explore/options_page.hpp>
+#include "options_page.hpp"
 
 #include <cppurses/painter/color.hpp>
 #include <cppurses/widget/size_policy.hpp>
+#include <cppurses/widget/widget_free_functions.hpp>
 
 namespace regex_explore {
 

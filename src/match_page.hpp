@@ -5,7 +5,7 @@
 #include <cppurses/widget/layouts/vertical_layout.hpp>
 #include <cppurses/widget/widgets/label.hpp>
 
-#include <regex_explore/match_box.hpp>
+#include "match_box.hpp"
 
 namespace regex_explore {
 

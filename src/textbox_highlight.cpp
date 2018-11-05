@@ -1,4 +1,4 @@
-#include <regex_explore/textbox_highlight.hpp>
+#include "textbox_highlight.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -6,8 +6,10 @@
 #include <cppurses/painter/attribute.hpp>
 #include <cppurses/painter/brush.hpp>
 #include <cppurses/painter/glyph.hpp>
+#include <cppurses/system/mouse_data.hpp>
+#include <cppurses/widget/widget_free_functions.hpp>
 
-#include <regex_explore/range.hpp>
+#include "range.hpp"
 
 namespace regex_explore {
 
@@ -51,14 +53,10 @@ void Textbox_highlight::clear_all_highlights() {
     this->update();
 }
 
-bool Textbox_highlight::mouse_press_event(cppurses::Mouse_button button,
-                                          cppurses::Point global,
-                                          cppurses::Point local,
-                                          std::uint8_t device_id) {
-    if (button == cppurses::Mouse_button::Left) {
-        clicked_at_index(this->index_at(local));
+bool Textbox_highlight::mouse_press_event(const cppurses::Mouse_data& mouse) {
+    if (mouse.button == cppurses::Mouse_button::Left) {
+        clicked_at_index(this->index_at(mouse.local));
     }
-    return cppurses::Textbox::mouse_press_event(button, global, local,
-                                                device_id);
+    return cppurses::Textbox::mouse_press_event(mouse);
 }
 }  // namespace regex_explore

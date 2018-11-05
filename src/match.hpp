@@ -2,7 +2,7 @@
 #define REGEX_EXPLORE_MATCH_HPP
 #include <vector>
 
-#include <regex_explore/range.hpp>
+#include "range.hpp"
 
 namespace regex_explore {
 

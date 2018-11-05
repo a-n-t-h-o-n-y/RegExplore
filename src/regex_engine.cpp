@@ -1,4 +1,4 @@
-#include <regex_explore/regex_store.hpp>
+#include "regex_engine.hpp"
 
 #include <algorithm>
 #include <cstddef>
@@ -6,10 +6,10 @@
 #include <string>
 #include <vector>
 
-#include <regex_explore/match.hpp>
-#include <regex_explore/option_flag.hpp>
-#include <regex_explore/range.hpp>
-#include <regex_explore/type_flag.hpp>
+#include "match.hpp"
+#include "option_flag.hpp"
+#include "range.hpp"
+#include "type_flag.hpp"
 
 // LOCAL UTILITY - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 namespace {
@@ -81,29 +81,29 @@ std::regex::flag_type type_to_mask(Type_flag type) {
 namespace regex_explore {
 
 // STATE CHANGES - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void Regex_store::set_text(std::string target_text) {
+void Regex_engine::set_text(std::string target_text) {
     target_text_ = target_text;
     this->update_results();
 }
 
-void Regex_store::set_regex(std::string regex_text) {
+void Regex_engine::set_regex(std::string regex_text) {
     regex_text_ = regex_text;
     this->update_results();
 }
 
-void Regex_store::set_type(Type_flag type) {
+void Regex_engine::set_type(Type_flag type) {
     regex_type_ = type;
     this->update_results();
 }
 
-void Regex_store::set_option(Option_flag option) {
+void Regex_engine::set_option(Option_flag option) {
     if (!contains(regex_options_, option)) {
         regex_options_.push_back(option);
     }
     this->update_results();
 }
 
-void Regex_store::unset_option(Option_flag option) {
+void Regex_engine::unset_option(Option_flag option) {
     auto at = find(regex_options_, option);
     if (at != std::end(regex_options_)) {
         regex_options_.erase(at);
@@ -113,11 +113,11 @@ void Regex_store::unset_option(Option_flag option) {
 
 // RESULTS - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // Throws std::out_of_range if out of bounds.
-Match Regex_store::get_match(std::size_t match_index) const {
+Match Regex_engine::get_match(std::size_t match_index) const {
     return matches_.at(match_index);
 }
 
-std::vector<std::string> Regex_store::get_match_strings(
+std::vector<std::string> Regex_engine::get_match_strings(
     std::size_t text_index) const {
     for (std::size_t i{0}; i < this->match_count(); ++i) {
         if (text_index >= matches_[i].entire.index &&
@@ -128,12 +128,12 @@ std::vector<std::string> Regex_store::get_match_strings(
     return std::vector<std::string>();
 }
 
-std::size_t Regex_store::match_count() const {
+std::size_t Regex_engine::match_count() const {
     return matches_.size();
 }
 
 // IMPLEMENTATION - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-void Regex_store::update_results() {
+void Regex_engine::update_results() {
     matches_.clear();
     if (regex_text_.empty() || target_text_.empty()) {
         return;
@@ -167,7 +167,7 @@ void Regex_store::update_results() {
     }
 }
 
-std::vector<std::string> Regex_store::get_strings(
+std::vector<std::string> Regex_engine::get_strings(
     std::size_t match_index) const {
     std::vector<std::string> results;
     const Match& match{matches_[match_index]};

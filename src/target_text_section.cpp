@@ -1,4 +1,4 @@
-#include <regex_explore/target_text_section.hpp>
+#include "target_text_section.hpp"
 
 #include <fstream>
 #include <streambuf>

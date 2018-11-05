@@ -1,4 +1,4 @@
-#include <regex_explore/top_bar.hpp>
+#include "top_bar.hpp"
 
 #include <cppurses/painter/color.hpp>
 #include <cppurses/widget/size_policy.hpp>

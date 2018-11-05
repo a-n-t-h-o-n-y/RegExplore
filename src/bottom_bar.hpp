@@ -2,9 +2,9 @@
 #define REGEX_EXPLORE_BOTTOM_BAR_HPP
 #include <cppurses/widget/layouts/horizontal_layout.hpp>
 
-#include <regex_explore/match_box.hpp>
-#include <regex_explore/match_page.hpp>
-#include <regex_explore/options_and_reference.hpp>
+#include "match_box.hpp"
+#include "match_page.hpp"
+#include "options_and_reference.hpp"
 
 namespace regex_explore {
 

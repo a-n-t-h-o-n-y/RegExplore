@@ -2,8 +2,8 @@
 #define REGEX_EXPLORE_OPTIONS_AND_REFERENCE_HPP
 #include <cppurses/widget/widgets/widget_stack.hpp>
 
-#include <regex_explore/options_page.hpp>
-#include <regex_explore/reference_page.hpp>
+#include "options_page.hpp"
+#include "reference_page.hpp"
 
 namespace regex_explore {
 
