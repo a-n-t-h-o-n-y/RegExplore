@@ -7,11 +7,11 @@
 
 namespace regex_explore {
 
-void Match_box::display_match(const std::vector<std::string> match_strings) {
+void Match_box::display_match(const std::vector<std::string>& match_strings) {
     std::stringstream ss;
     for (std::size_t i{0}; i < match_strings.size(); ++i) {
         if (i == 0) {
-            ss << "Entire Match: " << match_strings[i] << '\n';
+            ss << "Full Match: " << match_strings[i] << '\n';
         } else {
             ss << "Group " << i << ": " << match_strings[i] << '\n';
         }

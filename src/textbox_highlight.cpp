@@ -11,11 +11,19 @@
 
 #include "range.hpp"
 
+namespace {
+using namespace cppurses;
+Brush& brush_at(Text_display& td, std::size_t index) {
+    return td.glyph_at(index).brush;
+}
+}  // namespace
+
 namespace regex_explore {
 
 Textbox_highlight::Textbox_highlight() : Textbox("Target Text") {
-    set_background(*this, cppurses::Color::White);
-    set_foreground(*this, cppurses::Color::Black);
+    using cppurses::Color;
+    set_background(*this, Color::White);
+    set_foreground(*this, Color::Black);
 }
 
 void Textbox_highlight::set_highlight_color(cppurses::Color color) {
@@ -24,32 +32,33 @@ void Textbox_highlight::set_highlight_color(cppurses::Color color) {
 }
 
 void Textbox_highlight::add_highlight(const Range& range) {
-    for (std::size_t i{0}; i < range.length; ++i) {
-        std::size_t highlight_index{range.index + i};
-        if (highlight_index < this->contents_size()) {
-            this->glyph_at(highlight_index)
-                .brush.set_background(highlight_color_);
-            if (i == 0) {
-                this->glyph_at(highlight_index)
-                    .brush.add_attributes(cppurses::Attribute::Underline);
-            }
-        }
+    std::size_t end{range.index + range.length};
+    if (end > this->contents_size()) {
+        return;
+    }
+    if (range.length != 0) {
+        using cppurses::Attribute;
+        brush_at(*this, range.index).add_attributes(Attribute::Underline);
+    }
+    for (std::size_t i{range.index}; i < end; ++i) {
+        brush_at(*this, i).set_background(highlight_color_);
     }
     this->update();
 }
 
 void Textbox_highlight::remove_highlight(const Range& range) {
-    for (std::size_t i{0}; i < range.length; ++i) {
-        std::size_t highlight_index{range.index + i};
-        if (highlight_index < this->contents_size()) {
-            this->glyph_at(highlight_index).brush.remove_background();
-            this->glyph_at(highlight_index).brush.clear_attributes();
-        }
+    std::size_t end{range.index + range.length};
+    if (end > this->contents_size()) {
+        return;
+    }
+    for (std::size_t i{range.index}; i < end; ++i) {
+        brush_at(*this, i).remove_background();
+        brush_at(*this, i).clear_attributes();
     }
 }
 
 void Textbox_highlight::clear_all_highlights() {
-    this->remove_highlight(Range{0, this->contents_size()});
+    this->remove_highlight({0, this->contents_size()});
     this->update();
 }
 

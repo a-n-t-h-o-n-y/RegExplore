@@ -7,7 +7,7 @@
 namespace regex_explore {
 
 struct Match {
-    Range entire;
+    Range full;
     std::vector<Range> submatches;
 };
 

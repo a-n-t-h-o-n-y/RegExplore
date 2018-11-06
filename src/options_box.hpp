@@ -1,11 +1,11 @@
 #ifndef REGEX_EXPLORE_OPTIONS_BOX_HPP
 #define REGEX_EXPLORE_OPTIONS_BOX_HPP
+#include <regex>
+
 #include <cppurses/widget/layouts/vertical_layout.hpp>
 #include <cppurses/widget/widgets/checkbox.hpp>
 #include <cppurses/widget/widgets/label.hpp>
 #include <signals/signal.hpp>
-
-#include "option_flag.hpp"
 
 namespace regex_explore {
 
@@ -19,8 +19,8 @@ struct Options_box : cppurses::Vertical_layout {
     Checkbox& optimize{this->make_child<Checkbox>("Optimize")};
     Checkbox& collate{this->make_child<Checkbox>("Collate(locale)")};
 
-    sig::Signal<void(Option_flag)> option_enabled;
-    sig::Signal<void(Option_flag)> option_disabled;
+    sig::Signal<void(std::regex::flag_type)> option_enabled;
+    sig::Signal<void(std::regex::flag_type)> option_disabled;
 };
 
 }  // namespace regex_explore

@@ -13,19 +13,21 @@ Regex_enter::Regex_enter() {
 }
 
 Top_bar::Top_bar() {
-    this->height_policy.type(cppurses::Size_policy::Fixed);
+    using cppurses::Size_policy;
+    this->height_policy.type(Size_policy::Fixed);
     this->height_policy.hint(1);
 
-    regex_type_select.width_policy.type(cppurses::Size_policy::Maximum);
+    regex_type_select.width_policy.type(Size_policy::Maximum);
     regex_type_select.width_policy.hint(18);
     regex_type_select.set_divider(L'▸');
 
-    regex_type_select.cycle_box.add_option("ECMAScript");
-    regex_type_select.cycle_box.add_option("basic");
-    regex_type_select.cycle_box.add_option("extended");
-    regex_type_select.cycle_box.add_option("awk");
-    regex_type_select.cycle_box.add_option("grep");
-    regex_type_select.cycle_box.add_option("egrep");
+    auto& cycle_box = regex_type_select.cycle_box;
+    cycle_box.add_option("ECMAScript");
+    cycle_box.add_option("basic");
+    cycle_box.add_option("extended");
+    cycle_box.add_option("awk");
+    cycle_box.add_option("grep");
+    cycle_box.add_option("egrep");
 }
 
 }  // namespace regex_explore

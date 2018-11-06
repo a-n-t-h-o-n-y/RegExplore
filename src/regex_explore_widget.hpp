@@ -1,5 +1,7 @@
 #ifndef REGEX_EXPLORE_REGEX_EXPLORE_WIDGET_HPP
 #define REGEX_EXPLORE_REGEX_EXPLORE_WIDGET_HPP
+#include <regex>
+
 #include <cppurses/widget/layouts/vertical_layout.hpp>
 
 #include "bottom_bar.hpp"
@@ -28,8 +30,8 @@ class Regex_explore_widget : public cppurses::Vertical_layout {
     void set_target_text(const std::string& text);
     void set_regex_text(const std::string& regex);
     void set_regex_type(const std::string& option);
-    void add_option(Option_flag option);
-    void remove_option(Option_flag option);
+    void add_option(std::regex::flag_type option);
+    void remove_option(std::regex::flag_type option);
     void set_matchbox_text(std::size_t text_index);
 };
 

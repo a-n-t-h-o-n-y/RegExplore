@@ -20,15 +20,23 @@ class Textbox_highlight : public cppurses::Textbox {
    public:
     Textbox_highlight();
 
+    /// Set the color to highlight matches with.
     void set_highlight_color(cppurses::Color color);
 
+    /// Highlight a Range of text on the display.
     void add_highlight(const Range& range);
+
+    /// Remove a Range of text on the display.
     void remove_highlight(const Range& range);
+
+    /// Remove all highlights from the display.
     void clear_all_highlights();
 
-    bool mouse_press_event(const cppurses::Mouse_data& mouse) override;
-
+    /// Signal to notify of a mouse click on the text.
     sig::Signal<void(std::size_t)> clicked_at_index;
+
+   protected:
+    bool mouse_press_event(const cppurses::Mouse_data& mouse) override;
 
    private:
     cppurses::Color highlight_color_{cppurses::Color::Yellow};
