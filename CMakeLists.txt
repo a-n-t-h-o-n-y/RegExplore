@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.2)
 project(RegExplore)
 
+add_subdirectory(external/CPPurses)
+
 add_executable(regexplore
     src/main.cpp
     src/regex_engine.cpp
@@ -16,14 +18,11 @@ add_executable(regexplore
     src/options_box.cpp
 )
 
-target_compile_options(regexplore PUBLIC -Wall)
-target_compile_features(regexplore PUBLIC cxx_std_14)
-target_link_libraries(regexplore PUBLIC ncurses pthread
-    /usr/local/lib64/libcppurses.a)
+target_compile_options(regexplore PRIVATE -Wall -Wextra)
+target_compile_features(regexplore PRIVATE cxx_std_14)
+target_link_libraries(regexplore PRIVATE cppurses)
 
 include(GNUInstallDirs)
 install(TARGETS regexplore
-        ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
 )

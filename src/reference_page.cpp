@@ -3,8 +3,6 @@
 #include <string>
 
 #include <cppurses/painter/color.hpp>
-#include <cppurses/widget/size_policy.hpp>
-#include <cppurses/widget/widget_free_functions.hpp>
 
 namespace {
 
@@ -55,20 +53,21 @@ x|y    Either x or y, order matters)"};
 
 }  // namespace
 
+using namespace cppurses;
+
 namespace regex_explore {
 
 Reference_page::Reference_page() {
-    label.set_alignment(cppurses::Alignment::Center);
-    set_background(label, cppurses::Color::Light_gray);
-    set_foreground(label, cppurses::Color::Black);
+    label.set_alignment(Alignment::Center);
+    label.brush.set_background(Color::Light_gray);
+    label.brush.set_foreground(Color::Black);
 
     reference_text.disable_input();
-    reference_text.set_text(regex_reference);
+    reference_text.set_contents(regex_reference);
 
-    change_page.height_policy.type(cppurses::Size_policy::Fixed);
-    change_page.height_policy.hint(1);
-    set_background(change_page, cppurses::Color::Blue);
-    set_foreground(change_page, cppurses::Color::White);
+    change_page.height_policy.fixed(1);
+
+    change_page.brush.set_background(Color::Blue);
+    change_page.brush.set_foreground(Color::White);
 }
-
 }  // namespace regex_explore

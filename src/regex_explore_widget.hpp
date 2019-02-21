@@ -2,7 +2,7 @@
 #define REGEX_EXPLORE_REGEX_EXPLORE_WIDGET_HPP
 #include <regex>
 
-#include <cppurses/widget/layouts/vertical_layout.hpp>
+#include <cppurses/widget/layouts/vertical.hpp>
 
 #include "bottom_bar.hpp"
 #include "regex_engine.hpp"
@@ -11,7 +11,7 @@
 
 namespace regex_explore {
 
-class Regex_explore_widget : public cppurses::Vertical_layout {
+class Regex_explore_widget : public cppurses::layout::Vertical {
    public:
     Regex_explore_widget();
 

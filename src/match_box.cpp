@@ -18,7 +18,6 @@ void Match_box::display_match(const std::vector<std::string>& match_strings) {
     }
     std::string result{ss.str()};
     result.pop_back();
-    this->set_text(result);
+    this->set_contents(result);
 }
-
 }  // namespace regex_explore

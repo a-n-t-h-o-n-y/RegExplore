@@ -6,24 +6,24 @@
 #include <cppurses/painter/attribute.hpp>
 #include <cppurses/painter/brush.hpp>
 #include <cppurses/painter/glyph.hpp>
-#include <cppurses/system/mouse_data.hpp>
-#include <cppurses/widget/widget_free_functions.hpp>
+#include <cppurses/system/events/mouse.hpp>
 
 #include "range.hpp"
 
 namespace {
 using namespace cppurses;
+
 Brush& brush_at(Text_display& td, std::size_t index) {
-    return td.glyph_at(index).brush;
+    return td.contents()[index].brush;
 }
+
 }  // namespace
 
 namespace regex_explore {
 
 Textbox_highlight::Textbox_highlight() : Textbox("Target Text") {
-    using cppurses::Color;
-    set_background(*this, Color::White);
-    set_foreground(*this, Color::Black);
+    this->brush.set_background(Color::White);
+    this->brush.set_foreground(Color::Black);
 }
 
 void Textbox_highlight::set_highlight_color(cppurses::Color color) {
@@ -33,7 +33,7 @@ void Textbox_highlight::set_highlight_color(cppurses::Color color) {
 
 void Textbox_highlight::add_highlight(const Range& range) {
     std::size_t end{range.index + range.length};
-    if (end > this->contents_size()) {
+    if (end > this->contents().size()) {
         return;
     }
     if (range.length != 0) {
@@ -48,7 +48,7 @@ void Textbox_highlight::add_highlight(const Range& range) {
 
 void Textbox_highlight::remove_highlight(const Range& range) {
     std::size_t end{range.index + range.length};
-    if (end > this->contents_size()) {
+    if (end > this->contents().size()) {
         return;
     }
     for (std::size_t i{range.index}; i < end; ++i) {
@@ -58,12 +58,12 @@ void Textbox_highlight::remove_highlight(const Range& range) {
 }
 
 void Textbox_highlight::clear_all_highlights() {
-    this->remove_highlight({0, this->contents_size()});
+    this->remove_highlight({0, this->contents().size()});
     this->update();
 }
 
-bool Textbox_highlight::mouse_press_event(const cppurses::Mouse_data& mouse) {
-    if (mouse.button == cppurses::Mouse_button::Left) {
+bool Textbox_highlight::mouse_press_event(const cppurses::Mouse::State& mouse) {
+    if (mouse.button == cppurses::Mouse::Button::Left) {
         clicked_at_index(this->index_at(mouse.local));
     }
     return cppurses::Textbox::mouse_press_event(mouse);

@@ -1,18 +1,15 @@
 #include "options_page.hpp"
 
 #include <cppurses/painter/color.hpp>
-#include <cppurses/widget/size_policy.hpp>
-#include <cppurses/widget/widget_free_functions.hpp>
+
+using namespace cppurses;
 
 namespace regex_explore {
 
 Options_page::Options_page() {
-    options_box.height_policy.type(cppurses::Size_policy::Fixed);
-    options_box.height_policy.hint(5);
-    change_page.height_policy.type(cppurses::Size_policy::Fixed);
-    change_page.height_policy.hint(1);
-    set_background(change_page, cppurses::Color::Blue);
-    set_foreground(change_page, cppurses::Color::White);
+    options_box.height_policy.fixed(5);
+    change_page.height_policy.fixed(1);
+    change_page.brush.set_background(Color::Blue);
+    change_page.brush.set_foreground(Color::White);
 }
-
 }  // namespace regex_explore

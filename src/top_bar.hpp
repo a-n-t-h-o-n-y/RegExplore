@@ -1,13 +1,13 @@
 #ifndef REGEX_EXPLORE_TOP_BAR_HPP
 #define REGEX_EXPLORE_TOP_BAR_HPP
-#include <cppurses/widget/layouts/horizontal_layout.hpp>
+#include <cppurses/widget/layouts/horizontal.hpp>
 #include <cppurses/widget/widgets/label.hpp>
 #include <cppurses/widget/widgets/labeled_cycle_box.hpp>
 #include <cppurses/widget/widgets/line_edit.hpp>
 
 namespace regex_explore {
 
-struct Regex_enter : cppurses::Horizontal_layout {
+struct Regex_enter : cppurses::layout::Horizontal {
     Regex_enter();
 
     cppurses::Label& label{this->make_child<cppurses::Label>("Regex:")};
@@ -15,7 +15,7 @@ struct Regex_enter : cppurses::Horizontal_layout {
         this->make_child<cppurses::Line_edit>(R"(r(eg)e[x])")};
 };
 
-struct Top_bar : cppurses::Horizontal_layout {
+struct Top_bar : cppurses::layout::Horizontal {
     Top_bar();
 
     Regex_enter& regex_enter{this->make_child<Regex_enter>()};

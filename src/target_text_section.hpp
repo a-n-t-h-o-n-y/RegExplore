@@ -1,13 +1,13 @@
 #ifndef REGEX_EXPLORE_TARGET_TEXT_SECTION_HPP
 #define REGEX_EXPLORE_TARGET_TEXT_SECTION_HPP
-#include <cppurses/widget/layouts/vertical_layout.hpp>
+#include <cppurses/widget/layouts/vertical.hpp>
 #include <cppurses/widget/widgets/open_file.hpp>
 
 #include "textbox_highlight.hpp"
 
 namespace regex_explore {
 
-struct Target_text_section : cppurses::Vertical_layout {
+struct Target_text_section : cppurses::layout::Vertical {
     Target_text_section();
 
     Highlight_and_scroll& highlight_and_scroll{

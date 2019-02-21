@@ -2,14 +2,14 @@
 #define REGEX_EXPLORE_MATCH_PAGE_HPP
 #include <cstddef>
 
-#include <cppurses/widget/layouts/vertical_layout.hpp>
+#include <cppurses/widget/layouts/vertical.hpp>
 #include <cppurses/widget/widgets/label.hpp>
 
 #include "match_box.hpp"
 
 namespace regex_explore {
 
-struct Match_page : cppurses::Vertical_layout {
+struct Match_page : cppurses::layout::Vertical {
     Match_page();
 
     void set_match_count(std::size_t count);

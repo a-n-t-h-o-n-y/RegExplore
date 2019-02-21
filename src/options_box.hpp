@@ -2,14 +2,15 @@
 #define REGEX_EXPLORE_OPTIONS_BOX_HPP
 #include <regex>
 
-#include <cppurses/widget/layouts/vertical_layout.hpp>
+#include <signals/signal.hpp>
+
+#include <cppurses/widget/layouts/vertical.hpp>
 #include <cppurses/widget/widgets/checkbox.hpp>
 #include <cppurses/widget/widgets/label.hpp>
-#include <signals/signal.hpp>
 
 namespace regex_explore {
 
-struct Options_box : cppurses::Vertical_layout {
+struct Options_box : cppurses::layout::Vertical {
     Options_box();
     using Checkbox = cppurses::Checkbox;
 

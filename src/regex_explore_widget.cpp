@@ -10,7 +10,7 @@
 
 #include "regex_engine.hpp"
 
-using cppurses::Glyph_string;
+using namespace cppurses;
 
 namespace {
 using namespace regex_explore;
@@ -70,11 +70,13 @@ Regex_explore_widget::Regex_explore_widget() {
     this->update_displays();
 
     // Change Target Text
-    target_text_section.highlight_and_scroll.tb_highlight.text_changed.connect(
-        [this](const Glyph_string& gs) { this->set_target_text(gs.str()); });
+    target_text_section.highlight_and_scroll.tb_highlight.contents_modified
+        .connect([this](const Glyph_string& gs) {
+            this->set_target_text(gs.str());
+        });
 
     // Change Regex
-    top_bar.regex_enter.regex_edit.text_changed.connect(
+    top_bar.regex_enter.regex_edit.contents_modified.connect(
         [this](const Glyph_string& gs) { this->set_regex_text(gs.str()); });
 
     // Change Regex Type
@@ -119,7 +121,7 @@ void Regex_explore_widget::set_target_text(const std::string& text) {
     try {
         regex_engine_.set_target_text(text);
     } catch (const std::regex_error&) {
-        set_background(top_bar.regex_enter.regex_edit, cppurses::Color::Red);
+        top_bar.regex_enter.regex_edit.brush.set_background(Color::Red);
         return;
     }
     this->update_displays();
@@ -130,7 +132,7 @@ void Regex_explore_widget::set_regex_text(const std::string& regex) {
     try {
         regex_engine_.set_regex(regex);
     } catch (const std::regex_error&) {
-        set_background(top_bar.regex_enter.regex_edit, cppurses::Color::Red);
+        top_bar.regex_enter.regex_edit.brush.set_background(Color::Red);
         return;
     }
     this->update_displays();
@@ -153,7 +155,7 @@ void Regex_explore_widget::set_regex_type(const std::string& option) {
             regex_engine_.set_type(std::regex::egrep);
         }
     } catch (const std::regex_error&) {
-        set_background(top_bar.regex_enter.regex_edit, cppurses::Color::Red);
+        top_bar.regex_enter.regex_edit.brush.set_background(Color::Red);
         return;
     }
     this->update_displays();
@@ -164,7 +166,7 @@ void Regex_explore_widget::add_option(std::regex::flag_type option) {
     try {
         regex_engine_.set_option(option);
     } catch (const std::regex_error&) {
-        set_background(top_bar.regex_enter.regex_edit, cppurses::Color::Red);
+        top_bar.regex_enter.regex_edit.brush.set_background(Color::Red);
         return;
     }
     this->update_displays();
@@ -175,7 +177,7 @@ void Regex_explore_widget::remove_option(std::regex::flag_type option) {
     try {
         regex_engine_.unset_option(option);
     } catch (const std::regex_error&) {
-        set_background(top_bar.regex_enter.regex_edit, cppurses::Color::Red);
+        top_bar.regex_enter.regex_edit.brush.set_background(Color::Red);
         return;
     }
     this->update_displays();

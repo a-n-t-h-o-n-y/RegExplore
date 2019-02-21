@@ -3,14 +3,15 @@
 #include <regex>
 
 #include <cppurses/painter/color.hpp>
-#include <cppurses/widget/widget_free_functions.hpp>
+
+using namespace cppurses;
 
 namespace regex_explore {
 
 Options_box::Options_box() {
-    set_background(label, cppurses::Color::Light_gray);
-    set_foreground(label, cppurses::Color::Black);
-    label.set_alignment(cppurses::Alignment::Center);
+    label.brush.set_background(Color::Light_gray);
+    label.brush.set_foreground(Color::Black);
+    label.set_alignment(Alignment::Center);
 
     case_insensitive.checked.connect(
         [this] { this->option_enabled(std::regex::icase); });
@@ -29,5 +30,4 @@ Options_box::Options_box() {
     collate.unchecked.connect(
         [this] { this->option_disabled(std::regex::collate); });
 }
-
 }  // namespace regex_explore

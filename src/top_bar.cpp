@@ -1,24 +1,19 @@
 #include "top_bar.hpp"
 
 #include <cppurses/painter/color.hpp>
-#include <cppurses/widget/size_policy.hpp>
+
+using namespace cppurses;
 
 namespace regex_explore {
 
 Regex_enter::Regex_enter() {
-    label.width_policy.type(cppurses::Size_policy::Fixed);
-    label.width_policy.hint(7);
-
-    regex_edit.set_ghost_color(cppurses::Color::Light_gray);
+    label.width_policy.fixed(7);
+    regex_edit.set_ghost_color(Color::Light_gray);
 }
 
 Top_bar::Top_bar() {
-    using cppurses::Size_policy;
-    this->height_policy.type(Size_policy::Fixed);
-    this->height_policy.hint(1);
-
-    regex_type_select.width_policy.type(Size_policy::Maximum);
-    regex_type_select.width_policy.hint(18);
+    this->height_policy.fixed(1);
+    regex_type_select.width_policy.maximum(18);
     regex_type_select.set_divider(L'▸');
 
     auto& cycle_box = regex_type_select.cycle_box;
@@ -29,5 +24,4 @@ Top_bar::Top_bar() {
     cycle_box.add_option("grep");
     cycle_box.add_option("egrep");
 }
-
 }  // namespace regex_explore

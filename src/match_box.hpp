@@ -7,7 +7,7 @@
 
 namespace regex_explore {
 
-struct Match_box : public cppurses::Textbox {
+struct Match_box : cppurses::Textbox {
     void display_match(const std::vector<std::string>& match_strings);
 };
 
