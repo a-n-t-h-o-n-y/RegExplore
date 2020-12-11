@@ -8,9 +8,9 @@ using namespace cppurses;
 
 using Reg_widg_t = regex_explore::Regex_explore_widget;
 
-struct RegExplore : layout::Vertical {
-    Titlebar& title        = this->make_child<Titlebar>("RegExplore");
-    Reg_widg_t& regexplore = this->make_child<Reg_widg_t>();
+struct RegExplore : layout::Vertical<> {
+    Titlebar& title        = make_child<Titlebar>("RegExplore");
+    Reg_widg_t& regexplore = make_child<Reg_widg_t>();
 };
 
 int main() { return System{}.run<RegExplore>(); }
