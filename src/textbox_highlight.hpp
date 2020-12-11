@@ -85,8 +85,7 @@ class Textbox_highlight : public cppurses::Textbox {
 
 class Highlight_and_scroll : public cppurses::layout::Horizontal<> {
    public:
-    // TODO enable once link overload is finished
-    // Highlight_and_scroll() { link(scrollbar, tb_highlight); }
+    Highlight_and_scroll() { link(scrollbar, tb_highlight); }
 
    public:
     Textbox_highlight& tb_highlight = make_child<Textbox_highlight>();

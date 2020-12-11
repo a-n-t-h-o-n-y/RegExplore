@@ -4,6 +4,7 @@
 #include <string>
 
 #include <cppurses/painter/glyph_string.hpp>
+#include <cppurses/widget/pipe.hpp>
 #include <cppurses/widget/widgets/textbox.hpp>
 
 #include "match.hpp"
@@ -12,7 +13,11 @@ namespace regex_explore {
 
 class Match_box : public cppurses::Textbox {
    public:
-    Match_box() { this->Textbox::disable_input(); }
+    Match_box()
+    {
+        this->Textbox::disable_input();
+        *this | cppurses::pipe::hide_cursor();
+    }
 
    public:
     void display_match(Match const& m) { this->set_contents(make_display(m)); }

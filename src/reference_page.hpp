@@ -15,9 +15,9 @@ class Reference_page : public cppurses::layout::Vertical<> {
         using namespace cppurses::pipe;
         using cppurses::Color;
 
-        *this | hide_cursor();
         label | bg(Color::Light_gray) | fg(Color::Black) | align_center();
 
+        reference_text | hide_cursor();
         reference_text.disable_input();
         reference_text.set_contents(regex_reference);
 
